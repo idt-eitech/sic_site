@@ -1,6 +1,6 @@
 <template>
   <section id="students" class="students-section">
-    <h2>Students</h2>
+    <h2>Students Page</h2>
     <p class="desc">
       SIC supports the next generation of computing professionals with dedicated programs, grants, and mentoring opportunities.
     </p>

@@ -28,10 +28,6 @@ jobs:
       - name: Build
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: npm run build
-
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: dist
-          branch: gh-pages 
+        run: |
+          npm run build
+          npm run deploy

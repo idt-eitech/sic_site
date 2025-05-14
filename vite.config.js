@@ -12,7 +12,7 @@ export default defineConfig({
   server: {
     port: 9010
   },
-  base: '/sic_site/',
+  base: repoName,
   build: {
     outDir: 'dist',
     emptyOutDir: true
