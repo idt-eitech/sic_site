@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # or master, depending on your default branch name
+      - master  # or master, depending on your default branch name
   workflow_dispatch:  # Allows manual triggering
 
 permissions:
@@ -28,6 +28,10 @@ jobs:
       - name: Build
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
-        run: |
-          npm run build
-          npm run deploy
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: gh-pages 
