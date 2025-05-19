@@ -2,9 +2,8 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 // Get the repository name from the environment variable (if set in GitHub Actions)
-const repoName = process.env.GITHUB_REPOSITORY ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/` : '/';
+const base = process.env.GITHUB_REPOSITORY ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/` : './';
 
-console.log(`The repository name is ${repoName}`);
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -12,10 +11,18 @@ export default defineConfig({
   server: {
     port: 9010
   },
-  base: repoName,
+  base,
   build: {
     outDir: 'dist',
-    emptyOutDir: true
+    emptyOutDir: true,
+    // Ensure assets are referenced with the correct base path
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js'
+      }
+    }
   }
-  
 })
