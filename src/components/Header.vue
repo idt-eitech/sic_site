@@ -5,12 +5,11 @@
       <span class="org-name">SIC</span>
     </div>
     <nav class="nav-menu">
-      <a href="#about">About</a>
-      <a href="#conferences">Conferences</a>
-      <a href="#publications">Publications</a>
-      <a href="#membership">Membership</a>
-      <a href="#students">Students</a>
-      <a href="#contact">Contact</a>
+      <router-link to="/#about">About</router-link>
+      <router-link to="/#conferences">Conferences</router-link>
+      <router-link to="/#publications">Publications</router-link>
+      <router-link to="/#membership">Membership</router-link>
+      <router-link to="/#contact">Contact</router-link>
     </nav>
   </header>
 </template>

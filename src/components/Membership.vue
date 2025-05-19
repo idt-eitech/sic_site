@@ -8,10 +8,9 @@
       <li>Discounted conference registration</li>
       <li>Access to members-only publications</li>
       <li>Networking opportunities with international experts</li>
-      <li>Eligibility for SIC grants and awards</li>
-      <li>Student programs and mentoring</li>
+      <li>Eligibility for SIC grants and awards</li>      
     </ul>
-    <a href="#" class="join-btn">Join SIC</a>
+    <a href="/register" class="join-btn">Join SIC</a>
   </section>
 </template>
 

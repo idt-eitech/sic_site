@@ -6,14 +6,14 @@
     </p>
     <div class="conference-list">
       <div class="conference-card">
-        <h3>SIC Global Computing Summit 2024</h3>
-        <p>Date: July 15-18, 2024<br>Location: Berlin, Germany</p>
-        <a href="#" class="details-link">Details</a>
+        <h3>International Conference on Intelligent Computing (ICIC) 2025</h3>
+        <p>Date: July 26-29, 2025<br>Location: Ningbo, China</p>
+        <a href="http://www.ic-icc.cn/2025/index.php" class="details-link">Details</a>
       </div>
       <div class="conference-card">
-        <h3>SIC International Symposium 2024</h3>
-        <p>Date: December 2-5, 2024<br>Location: Tokyo, Japan</p>
-        <a href="#" class="details-link">Details</a>
+        <h3>International Conference on Artificial Intelligence (ICAI) 2025</h3>
+        <p>Date: November 6-9, 2025<br>Location: Nan'ning, China</p>
+        <a href="http://www.icai.org.cn/2025/" class="details-link">Details</a>
       </div>
     </div>
   </section>

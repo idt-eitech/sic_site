@@ -6,10 +6,7 @@
     </p>
     <ul class="pub-list">
       <li>
-        <a href="#" class="pub-link">Proceedings of SIC Global Computing Summit 2023</a>
-      </li>
-      <li>
-        <a href="#" class="pub-link">SIC Journal of International Computing, Vol. 5</a>
+        <a href="http://poster-openaccess.com/" class="pub-link">Papers Collection of ICIC & ICAI 2024</a>
       </li>
     </ul>
   </section>
