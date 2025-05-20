@@ -1,14 +1,14 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Register from '../components/Register.vue'
 
-// Get the base path from the environment variable (if set in GitHub Actions)
-const base = import.meta.env.BASE_URL;
+// Use the same base path as defined in vite.config.js
+const base = '/sic_site/';
 
 console.log('Router base path:', base);
 
 const router = createRouter({
-  history: createWebHashHistory(base),
+  history: createWebHistory(base),
   routes: [
     {
       path: '/',
