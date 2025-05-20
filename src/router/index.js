@@ -4,7 +4,10 @@ import Register from '../components/Register.vue'
 
 // Get the base path from the environment variable (if set in GitHub Actions)
 const base = import.meta.env.VITE_GITHUB_REPOSITORY ? `/${import.meta.env.VITE_GITHUB_REPOSITORY.split('/')[1]}/` : '/';
-console.log(base);
+
+console.log('Router base path:', base);
+console.log('Environment:', import.meta.env.VITE_GITHUB_REPOSITORY);
+
 const router = createRouter({
   history: createWebHistory(base),
   routes: [
