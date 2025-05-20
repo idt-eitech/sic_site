@@ -10,7 +10,7 @@
       <li>Networking opportunities with international experts</li>
       <li>Eligibility for SIC grants and awards</li>      
     </ul>
-    <a href="/register" class="join-btn">Join SIC</a>
+    <a href="#/register" class="join-btn">Join SIC</a>
   </section>
 </template>
 

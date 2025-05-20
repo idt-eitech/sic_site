@@ -1,9 +1,6 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches:
-      - master  # or master, depending on your default branch name
   workflow_dispatch:  # Allows manual triggering
 
 permissions:
