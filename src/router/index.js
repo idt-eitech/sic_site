@@ -3,12 +3,8 @@ import Home from '../views/Home.vue'
 import Register from '../components/Register.vue'
 
 // Use the same base path as defined in vite.config.js
-const base = '/sic_site/';
-
-console.log('Router base path:', base);
-
 const router = createRouter({
-  history: createWebHashHistory(base),
+  history: createWebHashHistory(),
   routes: [
     {
       path: '/',

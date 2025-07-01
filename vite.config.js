@@ -1,8 +1,7 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// Get the repository name from the environment variable (if set in GitHub Actions)
-const base = '/sic_site/';
+
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -10,7 +9,6 @@ export default defineConfig({
   server: {
     port: 9010
   },
-  base,
   build: {
     outDir: 'dist',
     emptyOutDir: true,

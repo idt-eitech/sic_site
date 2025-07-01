@@ -7,11 +7,6 @@
         <router-link to="/reset-password" class="tab">Reset password</router-link>
       </div>
 
-      <div class="warning-message">
-        We use reCaptcha during our registration process, but please note that reCaptcha may not work in all regions. 
-        If you have issues with reCaptcha, contact <a href="mailto:info@sic.org">info@sic.org</a> for assistance.
-      </div>
-
       <form @submit.prevent="handleSubmit" class="register-form">
         <div class="form-row">
           <div class="form-group">
@@ -207,15 +202,6 @@
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <div class="captcha-container">
-              <!-- Add reCAPTCHA component here -->
-              <div class="captcha-placeholder">reCAPTCHA will be implemented here</div>
-            </div>
-          </div>
-        </div>
-
         <div class="form-actions">
           <button type="submit" class="submit-btn">Create Account</button>
           <button type="button" class="cancel-btn" @click="$router.push('/')">Cancel</button>
@@ -273,7 +259,7 @@ const handleSubmit = () => {
 }
 
 .register-container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   background: #fff;
   border-radius: 8px;
@@ -316,10 +302,13 @@ const handleSubmit = () => {
 
 .form-row {
   margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
 }
 
 .form-group {
   width: 100%;
+  max-width: 600px;
 }
 
 label {
@@ -380,22 +369,11 @@ select:focus {
   color: #333;
 }
 
-.captcha-container {
-  margin: 1rem 0;
-}
-
-.captcha-placeholder {
-  padding: 2rem;
-  background: #f8f9fa;
-  border: 1px dashed #ccc;
-  text-align: center;
-  color: #666;
-}
-
 .form-actions {
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
+  justify-content: center;
 }
 
 .submit-btn {

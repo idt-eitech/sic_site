@@ -3,9 +3,10 @@
     <div class="footer-content">
       <div class="footer-left">
         <strong>SIC &mdash; The Society of International Computing</strong><br />
-        Contact: info@sic.org
+        Contact: icic@tongji.edu.cn
       </div>
       <div class="footer-right">
+        沪ICP备2021000765号-5
         &copy; 2024 SIC. All rights reserved.
       </div>
     </div>
