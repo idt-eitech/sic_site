@@ -4,7 +4,7 @@
     <About />
     <Conferences />
     <Publications />
-    <Membership />
+    <!-- <Membership /> -->
   </div>
 </template>
 
