@@ -2,18 +2,24 @@
   <section id="conferences" class="conferences-section">
     <h2>Upcoming Conferences</h2>
     <p class="desc">
-      SIC organizes two major international meetings each year, bringing together leading minds in computing technology.
+      SIC organizes two major international meetings each year, bringing together leading minds in computing technology. Below are highlights and official links for each.
     </p>
     <div class="conference-list">
       <div class="conference-card">
-        <h3>International Conference on Intelligent Computing (ICIC) 2025</h3>
-        <p>Date: July 26-29, 2025<br>Location: Ningbo, China</p>
-        <a href="http://www.ic-icc.cn/2025/index.php" class="details-link">Details</a>
+        <h3>International Conference on Intelligent Computing (ICIC) 2026</h3>
+        <p>Date: July 22–26, 2026<br>Location: Toronto, Canada</p>
+        <p><strong>Theme:</strong> Advanced Intelligent Computing Methodologies and Applications</p>
+        <p><strong>Proceedings:</strong> Springer-Nature (LNCS/LNAI/LNBI) for accepted Oral papers</p>
+        <p><strong>Support:</strong> Natural Science Foundation of China</p>
+        <a href="http://www.ic-icc.cn/" class="details-link" target="_blank" rel="noopener">Official Site</a>
       </div>
       <div class="conference-card">
-        <h3>International Conference on Artificial Intelligence (ICAI) 2025</h3>
-        <p>Date: November 6-9, 2025<br>Location: Nan'ning, China</p>
-        <a href="http://www.icai.org.cn/2025/" class="details-link">Details</a>
+        <h3>International Conference on Applied Intelligence (ICAI) 2025</h3>
+        <p>Date: November 6–9, 2025<br>Location: Nan'ning, Guangxi, China</p>
+        <p><strong>Theme:</strong> Advanced Applied Intelligence Methodologies and Applications</p>
+        <p><strong>Proceedings:</strong> Springer Verlag (CCIS)</p>
+        <p><strong>Support:</strong> Natural Science Foundation of China</p>        
+        <a href="http://icai.org.cn/" class="details-link" target="_blank" rel="noopener">Official Site</a>
       </div>
     </div>
   </section>
@@ -65,4 +71,4 @@
 .details-link:hover {
   color: #1976d2;
 }
-</style> 
+</style>
