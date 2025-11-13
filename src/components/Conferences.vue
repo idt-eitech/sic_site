@@ -14,12 +14,12 @@
         <a href="http://www.ic-icc.cn/" class="details-link" target="_blank" rel="noopener">Official Site</a>
       </div>
       <div class="conference-card">
-        <h3>International Conference on Applied Intelligence (ICAI) 2025</h3>
-        <p>Date: November 6–9, 2025<br>Location: Nan'ning, Guangxi, China</p>
+        <h3>International Conference on Applied Intelligence (ICAI) 2026</h3>
+        <p>Date: November 12–15, 2026<br>Location: Ningbo, Zhejiang, China</p>
         <p><strong>Theme:</strong> Advanced Applied Intelligence Methodologies and Applications</p>
-        <p><strong>Proceedings:</strong> Springer Verlag (CCIS)</p>
-        <p><strong>Support:</strong> Natural Science Foundation of China</p>        
-        <a href="http://icai.org.cn/" class="details-link" target="_blank" rel="noopener">Official Site</a>
+        <p><strong>Proceedings:</strong> Springer Verlag (LNCS/LNAI/LNBI/CCIS)</p>
+        <p><strong>Support:</strong> Natural Science Foundation of China</p>    
+        <a href="http://icai.org.cn/2026/index.php" class="details-link" target="_blank" rel="noopener">Official Site</a>
       </div>
     </div>
   </section>
