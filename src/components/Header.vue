@@ -7,7 +7,7 @@
     <nav class="nav-menu">
       <router-link to="/about">About</router-link>
       <router-link to="/conferences">Conferences</router-link>
-      <router-link to="/publications">Publications</router-link>
+      <router-link to="/journals">Journals</router-link>
       <!-- <router-link to="/membership">Membership</router-link> -->
       <router-link to="/contact">Contact</router-link>
     </nav>

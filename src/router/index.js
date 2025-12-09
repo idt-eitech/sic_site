@@ -5,6 +5,7 @@ import About from '../components/About.vue'
 import Conferences from '../components/Conferences.vue'
 import Publications from '../components/Publications.vue'
 import Membership from '../components/Membership.vue'
+import Journals from '../components/Journals.vue'
 
 // Use the same base path as defined in vite.config.js
 const router = createRouter({
@@ -25,6 +26,11 @@ const router = createRouter({
       path: '/conferences',
       name: 'conferences',
       component: Conferences
+    },
+    {
+      path: '/journals',
+      name: 'journals',
+      component: Journals
     },
     {
       path: '/publications',
