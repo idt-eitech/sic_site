@@ -10,9 +10,43 @@
       <router-link to="/journals">Journals</router-link>
       <!-- <router-link to="/membership">Membership</router-link> -->
       <router-link to="/contact">Contact</router-link>
+      
+      <!-- Authentication-aware navigation -->
+      <div v-if="authStore.state.isAuthenticated" class="user-menu">
+        <router-link to="/papers" class="papers-link">My Papers</router-link>
+        <router-link to="/paper-upload" class="upload-link">Upload Paper</router-link>
+        <router-link 
+          v-if="authStore.state.user?.role === 'ADMIN'" 
+          to="/admin" 
+          class="admin-link"
+        >
+          Admin
+        </router-link>
+        <router-link to="/profile" class="profile-link">Profile</router-link>
+        <span class="user-greeting">Hello, {{ authStore.state.user?.display_name }}</span>
+        <button @click="handleLogout" class="logout-btn">Logout</button>
+      </div>
+      <div v-else class="auth-links">
+        <router-link to="/login">Login</router-link>
+        <router-link to="/register">Register</router-link>
+      </div>
     </nav>
   </header>
 </template>
+
+<script setup>
+import { authStore } from '../stores/authStore.js'
+
+const handleLogout = async () => {
+  try {
+    await authStore.actions.logout()
+    // Optional: redirect to home after logout
+    // this.$router.push('/')
+  } catch (error) {
+    console.error('Logout error:', error)
+  }
+}
+</script>
 
 <style scoped>
 .sic-header {
@@ -27,6 +61,7 @@
 .logo-container {
   display: flex;
   align-items: center;
+  margin-right: 2rem;
 }
 .sic-logo {
   height: 48px;
@@ -37,14 +72,108 @@
   font-weight: bold;
   letter-spacing: 2px;
 }
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
 .nav-menu a {
   color: #fff;
-  margin-left: 1.5rem;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
 }
 .nav-menu a:hover {
   color: #90caf9; /* Lighter blue for hover */
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 1rem;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.user-greeting {
+  font-size: 0.9rem;
+  color: #e3f2fd;
+}
+
+.papers-link {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  color: #fff;
+  text-decoration: none;
+}
+
+.papers-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.admin-link {
+  background: #9b59b6;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  color: #fff;
+  text-decoration: none;
+}
+
+.admin-link:hover {
+  background: #8e44ad;
+  color: #fff;
+}
+
+.profile-link {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  color: #fff;
+  text-decoration: none;
+}
+
+.profile-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.upload-link {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.upload-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.logout-btn {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.auth-links {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 1rem;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
 }
 </style> 

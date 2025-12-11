@@ -1,11 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Register from '../components/Register.vue'
+import Login from '../components/Login.vue'
+import PaperUpload from '../components/PaperUpload.vue'
+import PaperList from '../components/PaperList.vue'
+import AdminDashboard from '../components/AdminDashboard.vue'
 import About from '../components/About.vue'
 import Conferences from '../components/Conferences.vue'
 import Publications from '../components/Publications.vue'
 import Membership from '../components/Membership.vue'
 import Journals from '../components/Journals.vue'
+import UserProfile from '../components/UserProfile.vue'
 
 // Use the same base path as defined in vite.config.js
 const router = createRouter({
@@ -55,7 +60,27 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: Register
+      component: Login
+    },
+    {
+      path: '/paper-upload',
+      name: 'paper-upload',
+      component: PaperUpload
+    },
+    {
+      path: '/papers',
+      name: 'papers',
+      component: PaperList
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: AdminDashboard
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: UserProfile
     },
     {
       path: '/reset-password',

@@ -4,21 +4,11 @@
       <div class="tabs">
         <div class="tab active">Create new account</div>
         <router-link to="/login" class="tab">Log in</router-link>
-        <router-link to="/reset-password" class="tab">Reset password</router-link>
       </div>
 
       <form @submit.prevent="handleSubmit" class="register-form">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="username">Username *</label>
-            <input 
-              type="text" 
-              id="username" 
-              v-model="form.username" 
-              required
-            >
-            <div class="field-help">Spaces are allowed; punctuation is not allowed except for periods, hyphens, apostrophes, and underscores.</div>
-          </div>
+        <div v-if="error" class="error-message">
+          {{ error }}
         </div>
 
         <div class="form-row">
@@ -30,7 +20,46 @@
               v-model="form.email" 
               required
             >
-            <div class="field-help">A valid email address. All emails from the system will be sent to this address. The email address is not made public and will only be used if you wish to receive a new password or wish to receive certain news or notifications by email.</div>
+            <div class="field-help">A valid email address. All emails from the system will be sent to this address.</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="password">Password *</label>
+            <input 
+              type="password" 
+              id="password" 
+              v-model="form.password" 
+              required
+            >
+            <div class="field-help">Create a strong password with at least 6 characters.</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="confirmPassword">Confirm Password *</label>
+            <input 
+              type="password" 
+              id="confirmPassword" 
+              v-model="form.confirmPassword" 
+              required
+            >
+            <div class="field-help">Please confirm your password.</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="display_name">Display Name (Optional)</label>
+            <input 
+              type="text" 
+              id="display_name" 
+              v-model="form.display_name"
+              placeholder="How you want to be displayed"
+            >
+            <div class="field-help">This will be shown to other users instead of your email.</div>
           </div>
         </div>
 
@@ -40,7 +69,8 @@
             <input 
               type="text" 
               id="firstName" 
-              v-model="form.firstName" 
+              v-model="form.firstName"
+              placeholder="Your first name"
               required
             >
           </div>
@@ -52,7 +82,8 @@
             <input 
               type="text" 
               id="lastName" 
-              v-model="form.lastName" 
+              v-model="form.lastName"
+              placeholder="Your last name"
               required
             >
           </div>
@@ -60,34 +91,12 @@
 
         <div class="form-row">
           <div class="form-group">
-            <label for="jobTitle">Job Title</label>
-            <input 
-              type="text" 
-              id="jobTitle" 
-              v-model="form.jobTitle"
-            >
-            <div class="field-help">(Example: Manager, System Engineer, etc.)</div>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="company">Company/Institution</label>
+            <label for="company">Company *</label>
             <input 
               type="text" 
               id="company" 
               v-model="form.company"
-            >
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="address1">Address 1 *</label>
-            <input 
-              type="text" 
-              id="address1" 
-              v-model="form.address1"
+              placeholder="Your company or institution"
               required
             >
           </div>
@@ -95,110 +104,14 @@
 
         <div class="form-row">
           <div class="form-group">
-            <label for="address2">Address 2</label>
+            <label for="mobile">Mobile *</label>
             <input 
-              type="text" 
-              id="address2" 
-              v-model="form.address2"
-            >
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="city">City *</label>
-            <input 
-              type="text" 
-              id="city" 
-              v-model="form.city"
+              type="tel" 
+              id="mobile" 
+              v-model="form.mobile"
+              placeholder="Your mobile number"
               required
             >
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="state">State *</label>
-            <select id="state" v-model="form.state" required>
-              <option value="">- Select -</option>
-              <option v-for="state in states" :key="state" :value="state">{{ state }}</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="zip">ZIP code *</label>
-            <input 
-              type="text" 
-              id="zip" 
-              v-model="form.zip"
-              required
-            >
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="sector">In what sector do you work? *</label>
-            <select id="sector" v-model="form.sector" required>
-              <option value="">- Select a value -</option>
-              <option value="academic">Academic</option>
-              <option value="industry">Industry</option>
-              <option value="government">Government</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="jobFunction">What is your primary job function? *</label>
-            <select id="jobFunction" v-model="form.jobFunction" required>
-              <option value="">- Select a value -</option>
-              <option value="academic">Academic/Researcher</option>
-              <option value="engineer">Engineer/Developer</option>
-              <option value="admin">System/Network Administration</option>
-              <option value="manager">Manager/Director</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label>Are you a full time student? *</label>
-            <div class="radio-group">
-              <label>
-                <input type="radio" v-model="form.isStudent" :value="false"> No
-              </label>
-              <label>
-                <input type="radio" v-model="form.isStudent" :value="true"> Yes
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <h3>Communications Preferences</h3>
-            <div class="checkbox-group">
-              <label>
-                <input type="checkbox" v-model="form.optOutEmail">
-                Opt out of all email from SIC
-              </label>
-            </div>
-            <div class="checkbox-group">
-              <label>
-                <input type="checkbox" v-model="form.optOutMail">
-                Opt out of paper mail
-              </label>
-            </div>
-            <div class="checkbox-group">
-              <label>
-                <input type="checkbox" v-model="form.optOutThirdParty">
-                Opt out of paper mail from third-party partners
-              </label>
-            </div>
           </div>
         </div>
 
@@ -212,42 +125,78 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { authService } from '../services/authService'
 
-const states = [
-  'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut',
-  'Delaware', 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois',
-  'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts',
-  'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada',
-  'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-  'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
-  'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia',
-  'Wisconsin', 'Wyoming'
-]
+const router = useRouter()
+const error = ref('')
+const loading = ref(false)
 
 const form = reactive({
-  username: '',
   email: '',
+  password: '',
+  confirmPassword: '',
+  display_name: '',
   firstName: '',
   lastName: '',
-  jobTitle: '',
   company: '',
-  address1: '',
-  address2: '',
-  city: '',
-  state: '',
-  zip: '',
-  sector: '',
-  jobFunction: '',
-  isStudent: false,
-  optOutEmail: false,
-  optOutMail: false,
-  optOutThirdParty: false
+  mobile: ''
 })
 
-const handleSubmit = () => {
-  // Handle form submission
-  console.log('Form submitted:', form)
+const handleSubmit = async () => {
+  error.value = ''
+  
+  if (form.password !== form.confirmPassword) {
+    error.value = 'Passwords do not match'
+    return
+  }
+  
+  if (form.password.length < 6) {
+    error.value = 'Password must be at least 6 characters long'
+    return
+  }
+  
+  loading.value = true
+  
+  try {
+    const registrationData = {
+      email: form.email,
+      password: form.password
+    }
+    
+    // Only include display_name if provided
+    if (form.display_name.trim()) {
+      registrationData.display_name = form.display_name.trim()
+    }
+    
+    // Create details object with optional fields
+    const details = {}
+    if (form.firstName.trim()) {
+      details.firstName = form.firstName.trim()
+    }
+    if (form.lastName.trim()) {
+      details.lastName = form.lastName.trim()
+    }
+    if (form.company.trim()) {
+      details.company = form.company.trim()
+    }
+    if (form.mobile.trim()) {
+      details.mobile = form.mobile.trim()
+    }
+    
+    // Only include details if it has any properties
+    if (Object.keys(details).length > 0) {
+      registrationData.details = details
+    }
+    
+    await authService.register(registrationData)
+    router.push('/login')
+  } catch (err) {
+    error.value = err.message || 'Registration failed. Please try again.'
+  } finally {
+    loading.value = false
+  }
 }
 </script>
 
