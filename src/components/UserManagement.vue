@@ -7,6 +7,36 @@
       </button>
     </div>
 
+    <div class="filters">
+      <div class="filter-group">
+        <label for="emailFilter">Email</label>
+        <input
+          id="emailFilter"
+          v-model="emailFilter"
+          type="text"
+          placeholder="Filter by email"
+          :disabled="usersLoading"
+        />
+      </div>
+      <div class="filter-group">
+        <label for="nameFilter">Name</label>
+        <input
+          id="nameFilter"
+          v-model="nameFilter"
+          type="text"
+          placeholder="Filter by name"
+          :disabled="usersLoading"
+        />
+      </div>
+      <button
+        class="filter-btn"
+        @click="applyFilters"
+        :disabled="usersLoading"
+      >
+        Apply Filters
+      </button>
+    </div>
+
     <div v-if="usersLoading" class="loading">
       <p>Loading users...</p>
     </div>
@@ -43,11 +73,11 @@
             <td>{{ user.details?.mobile || 'N/A' }}</td>
             <td>
               <button 
-                @click="openEditDetails(user)"
+                @click="toggleUserStatus(user)"
                 class="details-btn"
                 :disabled="userActionLoading[user.id]"
               >
-                Details
+                {{ user.is_active ? 'Disable' : 'Enable' }}
               </button>
               <span v-if="userActionLoading[user.id]" class="action-loading">
                 Updating...
@@ -56,6 +86,26 @@
           </tr>
         </tbody>
       </table>
+
+      <div class="pagination">
+        <button
+          class="page-btn"
+          @click="goToPreviousPage"
+          :disabled="usersLoading || currentPage === 1"
+        >
+          Previous
+        </button>
+        <span class="page-info">
+          Page {{ currentPage }} of {{ totalPages }} ({{ totalUsers }} users)
+        </span>
+        <button
+          class="page-btn"
+          @click="goToNextPage"
+          :disabled="usersLoading || currentPage === totalPages"
+        >
+          Next
+        </button>
+      </div>
     </div>
 
     <!-- Edit Details Modal -->
@@ -126,11 +176,18 @@ import adminService from '../services/adminService';
 
 const authStore = useAuthStore();
 
-// Users management
 const users = ref([]);
 const usersLoading = ref(false);
 const usersError = ref('');
 const userActionLoading = ref({});
+
+const currentPage = ref(1);
+const pageSize = ref(20);
+const totalUsers = ref(0);
+const totalPages = ref(1);
+
+const emailFilter = ref('');
+const nameFilter = ref('');
 
 // User details modal
 const showEditModal = ref(false);
@@ -152,15 +209,73 @@ const loadUsers = async () => {
       throw new Error('Not authenticated');
     }
     
-    const response = await adminService.getUsers(token);
-    // Filter out admin users - only show regular users
-    users.value = response.filter(user => user.role !== 'ADMIN');
+    const response = await adminService.getUsers(token, {
+      page: currentPage.value,
+      pageSize: pageSize.value,
+      email: emailFilter.value || undefined,
+      name: nameFilter.value || undefined
+    });
+
+    const items = Array.isArray(response.items) ? response.items : [];
+    users.value = items.filter(user => user.role !== 'ADMIN');
+    totalUsers.value = typeof response.total === 'number' ? response.total : items.length;
+    totalPages.value = typeof response.totalPages === 'number' && response.totalPages > 0 ? response.totalPages : 1;
   } catch (err) {
     usersError.value = err.message || 'Failed to load users';
     console.error('Error loading users:', err);
   } finally {
     usersLoading.value = false;
   }
+};
+
+const applyFilters = () => {
+  currentPage.value = 1;
+  loadUsers();
+};
+
+const goToPage = async (page) => {
+  if (page < 1) {
+    return;
+  }
+
+  if (page > totalPages.value) {
+    return;
+  }
+
+  if (page === currentPage.value) {
+    return;
+  }
+
+  currentPage.value = page;
+  await loadUsers();
+};
+
+const goToPreviousPage = () => {
+  if (usersLoading.value) {
+    return;
+  }
+
+  if (currentPage.value <= 1) {
+    return;
+  }
+
+  goToPage(currentPage.value - 1);
+};
+
+const goToNextPage = () => {
+  if (usersLoading.value) {
+    return;
+  }
+
+  if (currentPage.value >= totalPages.value) {
+    return;
+  }
+  
+  goToPage(currentPage.value + 1);
+};
+
+const toggleUserStatus = async (user) => {
+  await updateUser(user.id, { is_active: !user.is_active });
 };
 
 const updateUserRole = async (user) => {
@@ -255,6 +370,51 @@ onMounted(() => {
   margin: 0;
 }
 
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+}
+
+.filter-group label {
+  margin-bottom: 4px;
+  font-size: 0.85em;
+  color: #7f8c8d;
+}
+
+.filter-group input {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.filter-group input:disabled {
+  background-color: #f8f9fa;
+  cursor: not-allowed;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+}
+
+.filter-btn:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
 .refresh-btn {
   background-color: #3498db;
   color: white;
@@ -314,6 +474,34 @@ onMounted(() => {
 
 .users-table tr:hover {
   background-color: #f8f9fa;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.page-info {
+  color: #7f8c8d;
+  font-size: 0.9em;
+}
+
+.page-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+}
+
+.page-btn:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
 }
 
 .details-btn {

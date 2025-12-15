@@ -1,13 +1,26 @@
 import { API_BASE_URL, apiCall, withAuth } from './api.js';
 
-// Paper management services
 export const paperService = {
-  // Get all papers (admin gets all, regular users get their own)
-  async getPapers(token) {
-    return apiCall('/papers', withAuth(token));
+  async getPapers(token, options = {}) {
+    const params = new URLSearchParams();
+
+    if (options.page != null) {
+      params.set('page', String(options.page));
+    }
+
+    if (options.pageSize != null) {
+      params.set('pageSize', String(options.pageSize));
+    }
+
+    if (options.status) {
+      params.set('status', options.status);
+    }
+
+    const query = params.toString() ? `?${params.toString()}` : '';
+
+    return apiCall(`/papers${query}`, withAuth(token));
   },
 
-  // Upload a new paper
   async uploadPaper(token, formData) {
     const response = await fetch(`${API_BASE_URL}/papers`, {
       method: 'POST',
@@ -25,7 +38,6 @@ export const paperService = {
     return await response.json();
   },
 
-  // Accept a paper (admin only)
   async acceptPaper(token, paperId) {
     return apiCall(`/papers/${paperId}/accept`, {
       method: 'PATCH',
@@ -33,7 +45,6 @@ export const paperService = {
     });
   },
 
-  // Reject a paper (admin only)
   async rejectPaper(token, paperId) {
     return apiCall(`/papers/${paperId}/reject`, {
       method: 'PATCH',
@@ -41,7 +52,22 @@ export const paperService = {
     });
   },
 
-  // Helper to create form data for paper upload
+  async getPaperFile(token, paperId) {
+    const response = await fetch(`${API_BASE_URL}/papers/${paperId}/file`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || `HTTP ${response.status}`);
+    }
+
+    return await response.blob();
+  },
+
   createPaperFormData(file, title, description = '') {
     const formData = new FormData();
     formData.append('file', file);

@@ -48,12 +48,10 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 import { useAuthStore } from '../stores/authStore';
-import paperService from '../services/paperService';
 import adminService from '../services/adminService';
 
 const authStore = useAuthStore();
 
-// Stats
 const stats = ref({
   totalUsers: 0,
   activeUsers: 0,
@@ -61,58 +59,48 @@ const stats = ref({
   pendingPapers: 0
 });
 
-const loadUserStats = async () => {
+const loadStats = async () => {
   try {
     const token = authStore.state.token;
-    if (!token) return;
-    
-    const users = await adminService.getUsers(token);
-    stats.value.totalUsers = users.length;
+    if (!token) {
+      return;
+    }
+
+    const response = await adminService.getStats(token);
+
+    stats.value.totalUsers = typeof response.totalUsers === 'number' ? response.totalUsers : 0;
+    stats.value.totalPapers = typeof response.totalPapers === 'number' ? response.totalPapers : 0;
+    stats.value.pendingPapers = typeof response.pendingPapers === 'number' ? response.pendingPapers : 0;
   } catch (err) {
-    console.error('Error loading user stats:', err);
+    console.error('Error loading admin stats:', err);
   }
 };
 
-const loadPaperStats = async () => {
-  try {
-    const token = authStore.state.token;
-    if (!token) return;
-    
-    const papers = await paperService.getPapers(token);
-    stats.value.totalPapers = papers.length;
-    stats.value.pendingPapers = papers.filter(paper => paper.status === 'PENDING').length;
-  } catch (err) {
-    console.error('Error loading paper stats:', err);
-  }
-};
-
-// Load data when component is mounted
 onMounted(() => {
   if (authStore.state.isAuthenticated && authStore.state.user?.role === 'ADMIN') {
-    loadUserStats();
-    loadPaperStats();
+    loadStats();
   }
 });
 
-// Watch for authentication changes
 watch(() => authStore.state.isAuthenticated, (isAuthenticated) => {
   if (isAuthenticated && authStore.state.user?.role === 'ADMIN') {
-    loadUserStats();
-    loadPaperStats();
+    loadStats();
   } else {
-    stats.value = { totalUsers: 0, activeUsers: 0, totalPapers: 0, pendingPapers: 0 };
+    stats.value = {
+      totalUsers: 0,
+      activeUsers: 0,
+      totalPapers: 0,
+      pendingPapers: 0
+    };
   }
 });
 
-// Check if user is admin
 const isAdmin = computed(() => {
   return authStore.state.user?.role === 'ADMIN';
 });
 
-// Redirect if not admin
 watch(isAdmin, (isAdmin) => {
   if (!isAdmin && authStore.state.isAuthenticated) {
-    // Redirect to home if user is not admin
     window.location.href = '/';
   }
 }, { immediate: true });

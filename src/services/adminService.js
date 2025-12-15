@@ -1,13 +1,34 @@
 import { apiCall, withAuth } from './api.js';
 
-// Admin management services
 export const adminService = {
-  // Get all users (admin only)
-  async getUsers(token) {
-    return apiCall('/admin/users', withAuth(token));
+  async getUsers(token, options = {}) {
+    const params = new URLSearchParams();
+
+    if (options.page != null) {
+      params.set('page', String(options.page));
+    }
+
+    if (options.pageSize != null) {
+      params.set('pageSize', String(options.pageSize));
+    }
+
+    if (options.email) {
+      params.set('email', options.email);
+    }
+
+    if (options.name) {
+      params.set('name', options.name);
+    }
+
+    const query = params.toString() ? `?${params.toString()}` : '';
+
+    return apiCall(`/admin/users${query}`, withAuth(token));
   },
 
-  // Update user role or status (admin only)
+  async getStats(token) {
+    return apiCall('/admin/stats', withAuth(token));
+  },
+
   async updateUser(token, userId, updates) {
     return apiCall(`/admin/users/${userId}`, {
       method: 'PATCH',
@@ -16,7 +37,6 @@ export const adminService = {
     });
   },
 
-  // Helper to format user updates
   formatUserUpdates(updates) {
     const formatted = {};
     

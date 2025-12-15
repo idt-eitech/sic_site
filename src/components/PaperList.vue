@@ -24,7 +24,12 @@
     </div>
 
     <div v-else class="papers-grid">
-      <div v-for="paper in papers" :key="paper.id" class="paper-card">
+      <div
+        v-for="paper in papers"
+        :key="paper.id"
+        class="paper-card"
+        @click="handlePaperClick(paper)"
+      >
         <div class="paper-info">
           <h3>{{ paper.title }}</h3>
           <p class="description" v-if="paper.description">{{ paper.description }}</p>
@@ -39,8 +44,17 @@
               {{ formatFileSize(paper.file_size_bytes) }}
             </span>
           </div>
-          <div class="user-info" v-if="isAdmin && paper.user">
-            <small>By: {{ paper.user.email }}</small>
+          <div
+            class="user-info"
+            v-if="isAdmin && (paper.author_name || paper.author_email)"
+          >
+            <small>
+              By:
+              <span v-if="paper.author_name">{{ paper.author_name }}</span>
+              <span v-if="paper.author_name && paper.author_email"> (</span>
+              <span v-if="paper.author_email">{{ paper.author_email }}</span>
+              <span v-if="paper.author_name && paper.author_email">)</span>
+            </small>
           </div>
         </div>
         
@@ -98,6 +112,29 @@ const formatFileSize = (bytes) => {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 };
 
+const viewPaperFile = async (paper) => {
+  try {
+    error.value = '';
+
+    const token = authStore.state.token;
+    if (!token) {
+      throw new Error('Not authenticated');
+    }
+
+    const blob = await paperService.getPaperFile(token, paper.id);
+    const url = URL.createObjectURL(blob);
+
+    window.open(url, '_blank');
+
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+    }, 60000);
+  } catch (err) {
+    error.value = err.message || 'Failed to load paper file';
+    console.error('Error viewing paper file:', err);
+  }
+};
+
 const loadPapers = async () => {
   loading.value = true;
   error.value = '';
@@ -109,7 +146,8 @@ const loadPapers = async () => {
     }
     
     const response = await paperService.getPapers(token);
-    papers.value = response;
+    const items = Array.isArray(response.items) ? response.items : [];
+    papers.value = items;
   } catch (err) {
     error.value = err.message || 'Failed to load papers';
     console.error('Error loading papers:', err);
@@ -141,6 +179,14 @@ const performPaperAction = async (paperId, actionType, actionFunction) => {
   } finally {
     actionLoading.value[paperId] = null;
   }
+};
+
+const handlePaperClick = (paper) => {
+  if (isAdmin.value) {
+    return;
+  }
+
+  viewPaperFile(paper);
 };
 
 // Load papers when component is mounted

@@ -47,13 +47,15 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
 import { authStore } from '../stores/authStore.js'
+
+const router = useRouter()
 
 const handleLogout = async () => {
   try {
     await authStore.actions.logout()
-    // Optional: redirect to home after logout
-    // this.$router.push('/')
+    router.push('/')
   } catch (error) {
     console.error('Logout error:', error)
   }
