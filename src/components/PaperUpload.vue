@@ -38,12 +38,12 @@
           <input
             id="paperFile"
             type="file"
-            accept=".pdf,.doc,.docx"
+            accept=".pdf,application/pdf"
             required
             :disabled="isLoading"
             @change="handleFileSelect"
           />
-          <div class="field-help">Accepted formats: PDF, DOC, DOCX (Max 10MB)</div>
+          <div class="field-help">Accepted format: PDF only (Max 10MB)</div>
         </div>
         
         <div v-if="selectedFile" class="file-info">
@@ -104,10 +104,10 @@ const handleFileSelect = (event) => {
       return;
     }
     
-    // Check file type
-    const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    // Check file type - only PDF allowed
+    const allowedTypes = ['application/pdf'];
     if (!allowedTypes.includes(file.type)) {
-      error.value = 'Please select a PDF, DOC, or DOCX file';
+      error.value = 'Please select a PDF file only';
       selectedFile.value = null;
       return;
     }
@@ -135,7 +135,7 @@ const handleUpload = async () => {
     }
     formData.append('file', selectedFile.value);
     
-    const response = await paperService.uploadPaper(authStore.token, formData);
+    const response = await paperService.uploadPaper(authStore.state.token, formData);
     
     successMessage.value = 'Paper uploaded successfully!';
     

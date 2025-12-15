@@ -27,15 +27,20 @@
           </button>
         </div>
 
-        <div class="account-info">
-          <div class="info-item">
-            <label>Email:</label>
-            <span>{{ user.email }}</span>
-          </div>
-        </div>
-
         <form v-if="editing" @submit.prevent="saveProfile" class="details-form">
           <div class="form-grid">
+            <!-- Email (readonly) -->
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input
+                id="email"
+                :value="user.email"
+                type="text"
+                disabled
+                class="readonly-field"
+              />
+            </div>
+            
             <!-- Display Name (editable) -->
             <div class="form-group">
               <label for="display_name">Display Name:</label>
@@ -84,6 +89,11 @@
 
         <div v-else class="details-display">
           <div class="details-grid">
+            <div class="detail-item">
+              <label>Email:</label>
+              <span>{{ user.email }}</span>
+            </div>
+            
             <div class="detail-item">
               <label>Display Name:</label>
               <span>{{ user.display_name || 'Not set' }}</span>
@@ -317,8 +327,7 @@ onMounted(() => {
 
 .info-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   padding: 10px 0;
   border-bottom: 1px solid #ecf0f1;
 }
@@ -330,11 +339,12 @@ onMounted(() => {
 .info-item label {
   font-weight: 600;
   color: #2c3e50;
-  min-width: 120px;
+  margin-bottom: 5px;
 }
 
 .info-item span {
   color: #7f8c8d;
+  min-height: 20px;
 }
 
 .role-badge {
@@ -408,6 +418,12 @@ onMounted(() => {
   outline: none;
   border-color: #3498db;
   box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.readonly-field {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  cursor: not-allowed;
 }
 
 .form-actions {

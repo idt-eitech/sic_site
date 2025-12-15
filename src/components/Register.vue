@@ -52,12 +52,13 @@
 
         <div class="form-row">
           <div class="form-group">
-            <label for="display_name">Display Name (Optional)</label>
+            <label for="display_name">Display Name *</label>
             <input 
               type="text" 
               id="display_name" 
               v-model="form.display_name"
               placeholder="How you want to be displayed"
+              required
             >
             <div class="field-help">This will be shown to other users instead of your email.</div>
           </div>
@@ -146,6 +147,11 @@ const form = reactive({
 
 const handleSubmit = async () => {
   error.value = ''
+  
+  if (!form.display_name.trim()) {
+    error.value = 'Display Name is required'
+    return
+  }
   
   if (form.password !== form.confirmPassword) {
     error.value = 'Passwords do not match'
@@ -275,6 +281,7 @@ label {
 
 input[type="text"],
 input[type="email"],
+input[type="tel"],
 select {
   width: 100%;
   padding: 0.75rem;
@@ -287,6 +294,7 @@ select {
 
 input[type="text"]:focus,
 input[type="email"]:focus,
+input[type="tel"]:focus,
 select:focus {
   outline: none;
   border-color: #666;

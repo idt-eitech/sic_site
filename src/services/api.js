@@ -1,5 +1,5 @@
-// Base API configuration
-const API_BASE_URL = 'http://localhost:3000';
+// Base API configuration - uses environment variable
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 
 // Helper function for API calls
 async function apiCall(endpoint, options = {}) {

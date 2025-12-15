@@ -13,14 +13,26 @@
       
       <!-- Authentication-aware navigation -->
       <div v-if="authStore.state.isAuthenticated" class="user-menu">
-        <router-link to="/papers" class="papers-link">My Papers</router-link>
-        <router-link to="/paper-upload" class="upload-link">Upload Paper</router-link>
+        <router-link 
+          v-if="authStore.state.user?.role !== 'ADMIN'" 
+          to="/papers" 
+          class="papers-link"
+        >
+          My Papers
+        </router-link>
+        <router-link 
+          v-if="authStore.state.user?.role !== 'ADMIN'" 
+          to="/paper-upload" 
+          class="upload-link"
+        >
+          Upload Paper
+        </router-link>
         <router-link 
           v-if="authStore.state.user?.role === 'ADMIN'" 
           to="/admin" 
           class="admin-link"
         >
-          Admin
+          Dashboard
         </router-link>
         <router-link to="/profile" class="profile-link">Profile</router-link>
         <span class="user-greeting">Hello, {{ authStore.state.user?.display_name }}</span>
@@ -115,7 +127,6 @@ const handleLogout = async () => {
 }
 
 .admin-link {
-  background: #9b59b6;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   transition: background-color 0.2s;
@@ -124,7 +135,7 @@ const handleLogout = async () => {
 }
 
 .admin-link:hover {
-  background: #8e44ad;
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
 }
 

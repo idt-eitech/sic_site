@@ -5,6 +5,8 @@ import Login from '../components/Login.vue'
 import PaperUpload from '../components/PaperUpload.vue'
 import PaperList from '../components/PaperList.vue'
 import AdminDashboard from '../components/AdminDashboard.vue'
+import UserManagement from '../components/UserManagement.vue'
+import PaperManagement from '../components/PaperManagement.vue'
 import About from '../components/About.vue'
 import Conferences from '../components/Conferences.vue'
 import Publications from '../components/Publications.vue'
@@ -76,6 +78,16 @@ const router = createRouter({
       path: '/admin',
       name: 'admin',
       component: AdminDashboard
+    },
+    {
+      path: '/admin/users',
+      name: 'admin-users',
+      component: UserManagement
+    },
+    {
+      path: '/admin/papers',
+      name: 'admin-papers',
+      component: PaperManagement
     },
     {
       path: '/profile',
