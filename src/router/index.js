@@ -13,6 +13,8 @@ import Publications from '../components/Publications.vue'
 import Membership from '../components/Membership.vue'
 import Journals from '../components/Journals.vue'
 import UserProfile from '../components/UserProfile.vue'
+import Contact from '../components/Contact.vue'
+import ExecutiveBoard from '../components/ExecutiveBoard.vue'
 
 // Use the same base path as defined in vite.config.js
 const router = createRouter({
@@ -50,9 +52,14 @@ const router = createRouter({
       component: Membership
     },
     {
+      path: '/executive-board',
+      name: 'executive-board',
+      component: ExecutiveBoard
+    },
+    {
       path: '/contact',
       name: 'contact',
-      component: Home
+      component: Contact
     },
     {
       path: '/register',

@@ -8,6 +8,7 @@
       <router-link to="/about">About</router-link>
       <router-link to="/conferences">Conferences</router-link>
       <router-link to="/journals">Journals</router-link>
+      <router-link to="/executive-board">Board of Executive Committee</router-link>
       <!-- <router-link to="/membership">Membership</router-link> -->
       <router-link to="/contact">Contact</router-link>
       
