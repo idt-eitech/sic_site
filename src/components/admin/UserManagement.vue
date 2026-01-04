@@ -108,7 +108,6 @@
       </div>
     </div>
 
-    <!-- Edit Details Modal -->
     <div v-if="showEditModal" class="modal-overlay">
       <div class="modal">
         <div class="modal-header">
@@ -171,8 +170,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { useAuthStore } from '../stores/authStore';
-import adminService from '../services/adminService';
+import { useAuthStore } from '../../stores/authStore';
+import adminService from '../../services/adminService';
 
 const authStore = useAuthStore();
 
@@ -189,7 +188,6 @@ const totalPages = ref(1);
 const emailFilter = ref('');
 const nameFilter = ref('');
 
-// User details modal
 const showEditModal = ref(false);
 const editingUser = ref(null);
 const modalLoading = ref(false);
@@ -293,7 +291,6 @@ const updateUser = async (userId, updates) => {
     const token = authStore.state.token;
     await adminService.updateUser(token, userId, updates);
     
-    // Reload users to get updated data
     await loadUsers();
   } catch (err) {
     usersError.value = `Failed to update user: ${err.message}`;
@@ -303,7 +300,6 @@ const updateUser = async (userId, updates) => {
   }
 };
 
-// User details modal methods
 const openEditDetails = (user) => {
   editingUser.value = {
     ...user,
@@ -330,7 +326,6 @@ const saveUserDetails = async () => {
     
     await adminService.updateUser(token, editingUser.value.id, updates);
     
-    // Reload users to get updated data
     await loadUsers();
     closeEditModal();
   } catch (err) {
@@ -341,7 +336,6 @@ const saveUserDetails = async () => {
   }
 };
 
-// Load data when component is mounted
 onMounted(() => {
   if (authStore.state.isAuthenticated && authStore.state.user?.role === 'ADMIN') {
     loadUsers();
@@ -463,7 +457,7 @@ onMounted(() => {
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid #ecf0f1;
-  color: #2c3e50; /* Ensure text is visible */
+  color: #2c3e50;
 }
 
 .users-table th {
@@ -524,7 +518,6 @@ onMounted(() => {
   cursor: not-allowed;
 }
 
-/* Modal Styles */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -687,3 +680,4 @@ onMounted(() => {
   }
 }
 </style>
+

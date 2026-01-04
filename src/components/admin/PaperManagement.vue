@@ -120,8 +120,8 @@
 
 <script setup>
 import { ref, onMounted, watch } from 'vue';
-import { useAuthStore } from '../stores/authStore';
-import paperService from '../services/paperService';
+import { useAuthStore } from '../../stores/authStore';
+import paperService from '../../services/paperService';
 
 const authStore = useAuthStore();
 
@@ -265,7 +265,6 @@ const performPaperAction = async (paperId, actionType, actionFunction) => {
   }
 };
 
-// Load data when component is mounted
 onMounted(() => {
   if (authStore.state.isAuthenticated && authStore.state.user?.role === 'ADMIN') {
     loadPapers();
@@ -498,3 +497,4 @@ onMounted(() => {
   }
 }
 </style>
+

@@ -47,8 +47,8 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
-import { useAuthStore } from '../stores/authStore';
-import adminService from '../services/adminService';
+import { useAuthStore } from '../../stores/authStore';
+import adminService from '../../services/adminService';
 
 const authStore = useAuthStore();
 
@@ -140,115 +140,74 @@ watch(isAdmin, (isAdmin) => {
 }
 
 .stat-card h3 {
-  color: #7f8c8d;
-  font-size: 0.9em;
-  margin: 0 0 10px 0;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  color: #2c3e50;
 }
 
 .stat-number {
   font-size: 2em;
   font-weight: bold;
-  color: #2c3e50;
-  margin: 0;
+  color: #3498db;
 }
 
 .dashboard-content {
-  background: white;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 40px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
 }
 
 .welcome-message {
-  text-align: center;
+  max-width: 800px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .welcome-message h2 {
-  color: #2c3e50;
   margin-bottom: 10px;
+  color: #2c3e50;
 }
 
 .welcome-message p {
+  margin-bottom: 20px;
   color: #7f8c8d;
-  font-size: 1.1em;
-  margin-bottom: 30px;
 }
 
 .management-links {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
-  margin-top: 30px;
 }
 
 .management-link {
   display: flex;
   align-items: center;
-  background: #f8f9fa;
-  border: 2px solid #e9ecef;
-  border-radius: 12px;
-  padding: 25px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
   text-decoration: none;
-  color: #2c3e50;
-  transition: all 0.3s ease;
+  color: inherit;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .management-link:hover {
-  background: #e9ecef;
-  border-color: #3498db;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #e9ecef;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .link-icon {
-  font-size: 2.5em;
-  margin-right: 20px;
-  flex-shrink: 0;
+  font-size: 2em;
+  margin-right: 15px;
 }
 
 .link-content h3 {
-  margin: 0 0 8px 0;
-  font-size: 1.2em;
+  margin: 0 0 5px 0;
   color: #2c3e50;
 }
 
 .link-content p {
   margin: 0;
   color: #7f8c8d;
-  font-size: 0.95em;
-  line-height: 1.4;
-}
-
-@media (max-width: 768px) {
-  .admin-dashboard {
-    padding: 10px;
-  }
-  
-  .dashboard-stats {
-    grid-template-columns: 1fr;
-  }
-  
-  .dashboard-content {
-    padding: 20px;
-  }
-  
-  .management-links {
-    grid-template-columns: 1fr;
-  }
-  
-  .management-link {
-    flex-direction: column;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .link-icon {
-    margin-right: 0;
-    margin-bottom: 15px;
-    font-size: 2em;
-  }
 }
 </style>
+

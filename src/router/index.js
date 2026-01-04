@@ -1,20 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import Register from '../components/Register.vue'
-import Login from '../components/Login.vue'
-import PaperUpload from '../components/PaperUpload.vue'
-import PaperList from '../components/PaperList.vue'
-import AdminDashboard from '../components/AdminDashboard.vue'
-import UserManagement from '../components/UserManagement.vue'
-import PaperManagement from '../components/PaperManagement.vue'
-import About from '../components/About.vue'
-import Conferences from '../components/Conferences.vue'
-import Publications from '../components/Publications.vue'
-import Membership from '../components/Membership.vue'
-import Journals from '../components/Journals.vue'
-import UserProfile from '../components/UserProfile.vue'
-import Contact from '../components/Contact.vue'
-import ExecutiveBoard from '../components/ExecutiveBoard.vue'
+import Register from '../components/user/Register.vue'
+import Login from '../components/user/Login.vue'
+import PaperUpload from '../components/user/PaperUpload.vue'
+import PaperList from '../components/user/PaperList.vue'
+import AdminDashboard from '../components/admin/AdminDashboard.vue'
+import UserManagement from '../components/admin/UserManagement.vue'
+import PaperManagement from '../components/admin/PaperManagement.vue'
+import About from '../components/public/About.vue'
+import Conferences from '../components/public/Conferences.vue'
+import Publications from '../components/public/Publications.vue'
+import Membership from '../components/public/Membership.vue'
+import Journals from '../components/public/Journals.vue'
+import UserProfile from '../components/user/UserProfile.vue'
+import Contact from '../components/public/Contact.vue'
+import ExecutiveBoard from '../components/public/ExecutiveBoard.vue'
+import IcicEditorCommittee from '../components/public/IcicEditorCommittee.vue'
+import IcaiEditorCommittee from '../components/public/IcaiEditorCommittee.vue'
 
 // Use the same base path as defined in vite.config.js
 const router = createRouter({
@@ -35,6 +37,16 @@ const router = createRouter({
       path: '/conferences',
       name: 'conferences',
       component: Conferences
+    },
+    {
+      path: '/conferences/icic/editor-committee',
+      name: 'conferences-icic-editor-committee',
+      component: IcicEditorCommittee
+    },
+    {
+      path: '/conferences/icai/editor-committee',
+      name: 'conferences-icai-editor-committee',
+      component: IcaiEditorCommittee
     },
     {
       path: '/journals',

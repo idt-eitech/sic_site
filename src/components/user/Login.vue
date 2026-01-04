@@ -52,7 +52,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { authStore } from '../stores/authStore.js';
+import { authStore } from '../../stores/authStore.js';
 
 const router = useRouter();
 
@@ -64,10 +64,8 @@ const credentials = ref({
 const handleLogin = async () => {
   try {
     await authStore.actions.login(credentials.value);
-    // Redirect to home page after successful login
     router.push('/');
   } catch (error) {
-    // Error is already handled in the store
     console.error('Login failed:', error);
   }
 };
@@ -177,3 +175,4 @@ input:disabled {
   text-decoration: underline;
 }
 </style>
+

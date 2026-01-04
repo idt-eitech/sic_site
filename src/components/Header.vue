@@ -1,12 +1,43 @@
 <template>
-  <header class="sic-header">
+  <header
+    class="sic-header"
+    @mouseleave="closeActiveMenu"
+  >
     <div class="logo-container">
       <img src="/SIC_logo.jpg" alt="SIC Logo" class="sic-logo" />
       <span class="org-name">SIC</span>
     </div>
     <nav class="nav-menu">
       <router-link to="/about">About</router-link>
-      <router-link to="/conferences">Conferences</router-link>
+      <div
+        class="nav-item conferences-item"
+        @mouseenter="openMenu('conferences')"
+      >
+        <router-link
+          to="/conferences"
+          @focus="openMenu('conferences')"          
+        >
+          Conferences
+        </router-link>
+        <div
+          class="conference-submenu"
+          :class="{ 'is-open': activeTopMenu === 'conferences' }"
+          @mouseenter="openMenu('conferences')"
+        >
+          <div class="conference-list">
+            <h4>ICIC</h4>
+            <router-link to="/conferences/icic/editor-committee">
+              ICIC Editor Committee
+            </router-link>
+          </div>
+          <div class="conference-list">
+            <h4>ICAI</h4>
+            <router-link to="/conferences/icai/editor-committee">
+              ICAI Editor Committee
+            </router-link>
+          </div>
+        </div>
+      </div>
       <router-link to="/journals">Journals</router-link>
       <router-link to="/executive-board">Board of Executive Committee</router-link>
       <!-- <router-link to="/membership">Membership</router-link> -->
@@ -48,10 +79,21 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { authStore } from '../stores/authStore.js'
 
 const router = useRouter()
+
+const activeTopMenu = ref(null)
+
+const openMenu = (menuId) => {
+  activeTopMenu.value = menuId
+}
+
+const closeActiveMenu = () => {
+  activeTopMenu.value = null
+}
 
 const handleLogout = async () => {
   try {
@@ -72,6 +114,7 @@ const handleLogout = async () => {
   background: #1a237e; /* Deep blue from logo */
   color: #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  position: relative;
 }
 .logo-container {
   display: flex;
@@ -91,6 +134,8 @@ const handleLogout = async () => {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+}
+.nav-item {
 }
 .nav-menu a {
   color: #fff;
@@ -189,5 +234,45 @@ const handleLogout = async () => {
   margin-left: 1rem;
   padding-left: 1rem;
   border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.conference-submenu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin-top: 0;
+  background: #ffffff;
+  color: #1a237e;
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  display: none;
+  gap: 2rem;
+}
+.conference-submenu.is-open {
+  display: flex;
+}
+
+.conference-list {
+  min-width: 180px;
+}
+.conference-list h4 {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+  color: #1a237e;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+.conference-submenu a {
+  display: block;
+  color: #1a237e;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+.conference-submenu a:hover {
+  text-decoration: underline;
 }
 </style> 

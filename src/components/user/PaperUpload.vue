@@ -73,8 +73,8 @@
 
 <script setup>
 import { ref, reactive } from 'vue';
-import { authStore } from '../stores/authStore.js';
-import { paperService } from '../services/paperService.js';
+import { authStore } from '../../stores/authStore.js';
+import { paperService } from '../../services/paperService.js';
 
 const isLoading = ref(false);
 const error = ref('');
@@ -97,14 +97,12 @@ const formatFileSize = (bytes) => {
 const handleFileSelect = (event) => {
   const file = event.target.files[0];
   if (file) {
-    // Check file size (10MB max)
     if (file.size > 10 * 1024 * 1024) {
       error.value = 'File size must be less than 10MB';
       selectedFile.value = null;
       return;
     }
     
-    // Check file type - only PDF allowed
     const allowedTypes = ['application/pdf'];
     if (!allowedTypes.includes(file.type)) {
       error.value = 'Please select a PDF file only';
@@ -139,7 +137,6 @@ const handleUpload = async () => {
     
     successMessage.value = 'Paper uploaded successfully!';
     
-    // Reset form
     paperData.title = '';
     paperData.description = '';
     selectedFile.value = null;
@@ -288,3 +285,4 @@ input[type="file"] {
   cursor: not-allowed;
 }
 </style>
+

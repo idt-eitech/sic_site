@@ -13,7 +13,14 @@
           <div v-else class="avatar-placeholder"></div>
         </div>
         <div class="member-info">
-          <p class="member-name">{{ member.name }}</p>
+          <a
+            :href="member.profileUrl"
+            class="member-name-link"
+            target="_blank"
+            rel="noopener"
+          >
+            <p class="member-name">{{ member.name }}</p>
+          </a>
           <h3>{{ member.role }}</h3>
         </div>
       </div>
@@ -22,17 +29,17 @@
 </template>
 
 <script setup>
-import presidentImage from '../assets/committee/president.jpg'
+import presidentImage from '../../assets/committee/president.jpg'
 
 const members = [
-  { name: 'De-Shuang Huang', role: 'President', image: presidentImage },
-  { name: 'Member Name', role: 'VP of Conferences' },
-  { name: 'Member Name', role: 'VP of Publications' },
-  { name: 'Member Name', role: 'VP of Technical Activities' },
-  { name: 'Member Name', role: 'VP of Membership' },
-  { name: 'Member Name', role: 'VP of Finance' },
-  { name: 'Member Name', role: 'VP of Education' },
-  { name: 'Member Name', role: 'VP of Chapters' }
+  { name: 'De-Shuang Huang', role: 'President', image: presidentImage, profileUrl: 'https://person.eitech.edu.cn/xxkxyjsxb/hds/main.htm' },
+  { name: 'Member Name', role: 'VP of Conferences', profileUrl: 'https://example.com/profile/vp-conferences' },
+  { name: 'Member Name', role: 'VP of Publications', profileUrl: 'https://example.com/profile/vp-publications' },
+  { name: 'Member Name', role: 'VP of Technical Activities', profileUrl: 'https://example.com/profile/vp-technical-activities' },
+  { name: 'Member Name', role: 'VP of Membership', profileUrl: 'https://example.com/profile/vp-membership' },
+  { name: 'Member Name', role: 'VP of Finance', profileUrl: 'https://example.com/profile/vp-finance' },
+  { name: 'Member Name', role: 'VP of Education', profileUrl: 'https://example.com/profile/vp-education' },
+  { name: 'Member Name', role: 'VP of Chapters', profileUrl: 'https://example.com/profile/vp-chapters' }
 ];
 </script>
 
@@ -82,9 +89,16 @@ const members = [
   color: #1a237e;
   font-size: 1.05rem;
 }
+.member-name-link {
+  text-decoration: none;
+}
+.member-name-link:hover .member-name {
+  text-decoration: underline;
+}
 .member-name {
   margin: 0 0 0.1rem 0;
   color: #37474f;
   font-size: 0.95rem;
 }
 </style>
+

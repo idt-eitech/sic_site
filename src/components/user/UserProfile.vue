@@ -29,7 +29,6 @@
 
         <form v-if="editing" @submit.prevent="saveProfile" class="details-form">
           <div class="form-grid">
-            <!-- Email (readonly) -->
             <div class="form-group">
               <label for="email">Email:</label>
               <input
@@ -41,7 +40,6 @@
               />
             </div>
             
-            <!-- Display Name (editable) -->
             <div class="form-group">
               <label for="display_name">Display Name:</label>
               <input
@@ -52,7 +50,6 @@
               />
             </div>
             
-            <!-- Dynamically create edit fields for all details properties -->
             <div 
               v-for="(value, key) in editableUser.details" 
               :key="key" 
@@ -98,7 +95,6 @@
               <label>Display Name:</label>
               <span>{{ user.display_name || 'Not set' }}</span>
             </div>
-            <!-- Dynamically display all fields from details object -->
             <div 
               v-for="(value, key) in user.details" 
               :key="key" 
@@ -120,8 +116,8 @@
 
 <script setup>
 import { ref, reactive, computed, onMounted } from 'vue';
-import { useAuthStore } from '../stores/authStore.js';
-import authService from '../services/authService.js';
+import { useAuthStore } from '../../stores/authStore.js';
+import authService from '../../services/authService.js';
 
 const authStore = useAuthStore();
 
@@ -143,47 +139,74 @@ const successMessage = ref('');
 const editing = ref(false);
 
 const hasChanges = computed(() => {
-  // Check display name change
-  if (editableUser.display_name !== user.value.display_name) {
+  if (!user.value || !user.value.details) {
+    return false;
+  }
+
+  if (editableUser.display_name !== (user.value.display_name || '')) {
     return true;
   }
-  
-  // Check if any details field has changed
-  for (const key in editableUser.details) {
-    const currentValue = editableUser.details[key];
-    const originalValue = user.value.details?.[key] || '';
-    if (currentValue !== originalValue) {
+
+  const keys = new Set([
+    ...Object.keys(user.value.details || {}),
+    ...Object.keys(editableUser.details || {})
+  ]);
+
+  for (const key of keys) {
+    const originalValue = (user.value.details && user.value.details[key]) || '';
+    const editedValue = (editableUser.details && editableUser.details[key]) || '';
+    if (originalValue !== editedValue) {
       return true;
     }
   }
-  
+
   return false;
 });
+
+const formatLabel = (key) => {
+  if (!key) return '';
+  return key
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/^./, (str) => str.toUpperCase());
+};
+
+const populateEditableUser = () => {
+  if (!user.value) {
+    return;
+  }
+
+  editableUser.display_name = user.value.display_name || '';
+  
+  const details = user.value.details || {};
+  editableUser.details = {
+    firstName: details.firstName || '',
+    lastName: details.lastName || '',
+    jobTitle: details.jobTitle || '',
+    company: details.company || ''
+  };
+};
 
 const loadProfile = async () => {
   loading.value = true;
   error.value = '';
-  
+  successMessage.value = '';
+
   try {
     const token = authStore.state.token;
-    const userData = await authService.getCurrentUser(token);
-    user.value = userData;
-    
-    // Initialize editable user data
-    editableUser.display_name = userData.display_name || '';
-    
-    // Initialize details dynamically from user data
-    editableUser.details = {};
-    if (userData.details) {
-      for (const key in userData.details) {
-        editableUser.details[key] = userData.details[key] || '';
-      }
+    if (!token) {
+      throw new Error('You must be logged in to view your profile.');
     }
-    
 
+    const profile = await authService.getProfile(token);
+    user.value = profile || {};
+
+    if (!user.value.details) {
+      user.value.details = {};
+    }
+
+    populateEditableUser();
   } catch (err) {
-    error.value = `Failed to load profile: ${err.message}`;
-    console.error('Error loading profile:', err);
+    error.value = err.message || 'Failed to load profile. Please try again.';
   } finally {
     loading.value = false;
   }
@@ -191,67 +214,57 @@ const loadProfile = async () => {
 
 const toggleEditMode = () => {
   if (editing.value) {
-    // Reset to original values
-    editableUser.display_name = user.value.display_name || '';
-    
-    // Reset details dynamically from user data
-    editableUser.details = {};
-    if (user.value.details) {
-      for (const key in user.value.details) {
-        editableUser.details[key] = user.value.details[key] || '';
-      }
-    }
-    
-
+    editing.value = false;
+    populateEditableUser();
+    error.value = '';
+    successMessage.value = '';
+    return;
   }
-  editing.value = !editing.value;
+
+  editing.value = true;
   successMessage.value = '';
 };
 
 const saveProfile = async () => {
+  if (!hasChanges.value) {
+    return;
+  }
+
   saving.value = true;
   error.value = '';
   successMessage.value = '';
-  
+
   try {
     const token = authStore.state.token;
-    const updates = {
+    if (!token) {
+      throw new Error('You must be logged in to update your profile.');
+    }
+
+    const updateData = {
       display_name: editableUser.display_name,
-      details: editableUser.details
+      details: { ...editableUser.details }
     };
-    
-    await authService.updateCurrentUser(token, updates);
-    
-    // Reload profile to get updated data
-    await loadProfile();
-    
-    successMessage.value = 'Profile updated successfully!';
+
+    const updatedProfile = await authService.updateProfile(token, updateData);
+
+    user.value = updatedProfile || {
+      ...user.value,
+      ...updateData
+    };
+
+    if (!user.value.details) {
+      user.value.details = { ...updateData.details };
+    }
+
+    populateEditableUser();
+
+    successMessage.value = 'Profile updated successfully.';
     editing.value = false;
   } catch (err) {
-    error.value = `Failed to update profile: ${err.message}`;
-    console.error('Error updating profile:', err);
+    error.value = err.message || 'Failed to update profile. Please try again.';
   } finally {
     saving.value = false;
   }
-};
-
-const formatDate = (dateString) => {
-  if (!dateString) return 'Never';
-  return new Date(dateString).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  });
-};
-
-const formatLabel = (key) => {
-  // Convert camelCase to Title Case with spaces
-  return key
-    .replace(/([A-Z])/g, ' $1')
-    .replace(/^./, str => str.toUpperCase())
-    .trim();
 };
 
 onMounted(() => {
@@ -261,7 +274,7 @@ onMounted(() => {
 
 <style scoped>
 .user-profile {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -278,15 +291,14 @@ onMounted(() => {
 
 .profile-header p {
   color: #7f8c8d;
-  font-size: 1.1em;
+  margin: 0;
 }
 
 .profile-card {
   background: white;
   border-radius: 8px;
-  padding: 25px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
@@ -494,30 +506,9 @@ onMounted(() => {
   background-color: #3498db;
   color: white;
   border: none;
-  padding: 8px 16px;
+  padding: 10px 20px;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px;
-}
-
-.retry-btn:hover {
-  background-color: #2980b9;
-}
-
-@media (max-width: 768px) {
-  .form-grid,
-  .details-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .info-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-  
-  .info-item label {
-    min-width: auto;
-  }
 }
 </style>
+

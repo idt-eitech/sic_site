@@ -87,8 +87,8 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
-import { useAuthStore } from '../stores/authStore';
-import paperService from '../services/paperService';
+import { useAuthStore } from '../../stores/authStore';
+import paperService from '../../services/paperService';
 
 const authStore = useAuthStore();
 const papers = ref([]);
@@ -171,7 +171,6 @@ const performPaperAction = async (paperId, actionType, actionFunction) => {
     const token = authStore.state.token;
     await actionFunction(token, paperId);
     
-    // Reload papers to get updated status
     await loadPapers();
   } catch (err) {
     error.value = `Failed to ${actionType} paper: ${err.message}`;
@@ -189,14 +188,12 @@ const handlePaperClick = (paper) => {
   viewPaperFile(paper);
 };
 
-// Load papers when component is mounted
 onMounted(() => {
   if (authStore.state.isAuthenticated) {
     loadPapers();
   }
 });
 
-// Watch for authentication changes
 watch(() => authStore.state.isAuthenticated, (isAuthenticated) => {
   if (isAuthenticated) {
     loadPapers();
@@ -337,62 +334,41 @@ watch(() => authStore.state.isAuthenticated, (isAuthenticated) => {
   border-top: 1px solid #ecf0f1;
 }
 
-.user-info small {
-  color: #7f8c8d;
-}
-
 .paper-actions {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px solid #ecf0f1;
+}
+
+.accept-btn,
+.reject-btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
 }
 
 .accept-btn {
   background-color: #27ae60;
   color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9em;
-}
-
-.accept-btn:disabled {
-  background-color: #bdc3c7;
-  cursor: not-allowed;
 }
 
 .reject-btn {
   background-color: #e74c3c;
   color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9em;
 }
 
+.accept-btn:disabled,
 .reject-btn:disabled {
   background-color: #bdc3c7;
   cursor: not-allowed;
 }
 
 .status-info {
+  font-size: 0.9em;
   color: #7f8c8d;
-  font-style: italic;
-}
-
-@media (max-width: 768px) {
-  .papers-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .header {
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
-  }
 }
 </style>
+

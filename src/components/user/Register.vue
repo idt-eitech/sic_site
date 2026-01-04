@@ -128,7 +128,7 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { authService } from '../services/authService'
+import { authService } from '../../services/authService'
 
 const router = useRouter()
 const error = ref('')
@@ -171,12 +171,10 @@ const handleSubmit = async () => {
       password: form.password
     }
     
-    // Only include display_name if provided
     if (form.display_name.trim()) {
       registrationData.display_name = form.display_name.trim()
     }
     
-    // Create details object with optional fields
     const details = {}
     if (form.firstName.trim()) {
       details.firstName = form.firstName.trim()
@@ -191,7 +189,6 @@ const handleSubmit = async () => {
       details.mobile = form.mobile.trim()
     }
     
-    // Only include details if it has any properties
     if (Object.keys(details).length > 0) {
       registrationData.details = details
     }
@@ -210,184 +207,112 @@ const handleSubmit = async () => {
 .register-section {
   padding: 3rem 2rem;
   background: #f5f7fa;
-  color: #333;
+  color: #1a237e;
 }
-
 .register-container {
-  max-width: 1000px;
+  max-width: 700px;
   margin: 0 auto;
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(26,35,126,0.06);
+  padding: 2rem 2.5rem;
 }
-
 .tabs {
   display: flex;
-  border-bottom: 1px solid #ddd;
-  margin-bottom: 2rem;
-}
-
-.tab {
-  padding: 1rem 2rem;
-  color: #666;
-  text-decoration: none;
-  font-weight: 500;
-  border-bottom: 3px solid transparent;
-}
-
-.tab.active {
-  border-bottom-color: #666;
-  font-weight: bold;
-  color: #333;
-}
-
-.warning-message {
-  background: #fff3cd;
-  color: #856404;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  border-radius: 4px;
-}
-
-.warning-message a {
-  color: #0066cc;
-  text-decoration: underline;
-}
-
-.form-row {
+  border-bottom: 1px solid #e0e0e0;
   margin-bottom: 1.5rem;
-  display: flex;
-  justify-content: center;
 }
-
-.form-group {
-  width: 100%;
-  max-width: 600px;
-}
-
-label {
-  display: block;
-  margin-bottom: 0.5rem;
-  color: #333;
+.tab {
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
   font-weight: 500;
+  color: #1a237e;
+  text-decoration: none;
 }
-
-.field-help {
-  font-size: 0.875rem;
-  color: #666;
-  margin-top: 0.25rem;
+.tab.active {
+  border-bottom: 3px solid #1a237e;
 }
-
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-select {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  color: #333;
-  background-color: #fff;
+.tab + .tab {
+  margin-left: 1rem;
 }
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus,
-select:focus {
-  outline: none;
-  border-color: #666;
-  box-shadow: 0 0 0 2px rgba(102,102,102,0.1);
-}
-
-.radio-group {
+.register-form {
   display: flex;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 1rem;
 }
-
-.radio-group label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: normal;
-  color: #333;
-}
-
-.checkbox-group {
-  margin-bottom: 0.5rem;
-}
-
-.checkbox-group label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: normal;
-  color: #333;
-}
-
-.form-actions {
+.form-row {
   display: flex;
   gap: 1rem;
-  margin-top: 2rem;
-  justify-content: center;
 }
-
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #1a237e;
+}
+input {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+input:focus {
+  outline: none;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.15);
+}
+.field-help {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
 .submit-btn {
-  background: #0066cc;
+  background: #1a237e;
   color: #fff;
-  padding: 0.75rem 2rem;
   border: none;
+  padding: 0.75rem 1.5rem;
   border-radius: 4px;
-  font-size: 1rem;
-  font-weight: bold;
   cursor: pointer;
-  transition: background 0.2s;
+  font-weight: 600;
 }
-
 .submit-btn:hover {
-  background: #0052a3;
+  background: #303f9f;
 }
-
 .cancel-btn {
-  background: #fff;
+  background: #e0e0e0;
   color: #333;
-  padding: 0.75rem 2rem;
-  border: 1px solid #ccc;
+  border: none;
+  padding: 0.75rem 1.5rem;
   border-radius: 4px;
-  font-size: 1rem;
-  font-weight: bold;
   cursor: pointer;
-  transition: all 0.2s;
 }
-
 .cancel-btn:hover {
-  background: #f8f9fa;
-  border-color: #999;
+  background: #d5d5d5;
 }
-
+.error-message {
+  padding: 0.75rem 1rem;
+  background: #ffebee;
+  color: #c62828;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
 @media (max-width: 600px) {
   .register-container {
     padding: 1.5rem;
   }
-  
-  .tabs {
+  .form-row {
     flex-direction: column;
-    border-bottom: none;
-  }
-  
-  .tab {
-    padding: 0.75rem 0;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .form-actions {
-    flex-direction: column;
-  }
-  
-  .submit-btn,
-  .cancel-btn {
-    width: 100%;
   }
 }
-</style> 
+</style>
+
