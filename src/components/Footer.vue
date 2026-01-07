@@ -7,7 +7,7 @@
       </div>
       <div class="footer-right">
         沪ICP备2021000765号-5<br/>
-        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011402009930" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/src/assets/备案图标.png" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">沪公网安备 31011402009930号</p></a>
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011402009930" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/src/assets/备案图标.png" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">沪公网安备31011402021639号</p></a>
       </div>
     </div>
   </footer>
