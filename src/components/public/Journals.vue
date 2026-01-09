@@ -31,7 +31,7 @@
 <style scoped>
 .journals-section {
   padding: 3rem 2rem;
-  background: #fff;
+  background: #f5f7fa;
   color: #1a237e;
 }
 .journals-section h2 {
@@ -46,7 +46,7 @@
 .journal-card {
   max-width: 760px;
   margin: 0 auto;
-  background: #f5f7fa;
+  background: #fff;
   border: 1px solid #e3e8f5;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(26,35,126,0.06);
@@ -68,4 +68,3 @@
   color: #1976d2;
 }
 </style>
-

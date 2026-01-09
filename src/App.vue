@@ -22,7 +22,9 @@ import Footer from './components/Footer.vue'
 }
 .app-content {
   flex: 1;
-  width: 80vw;
+  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
+  background: #f5f7fa;
 }
 </style>
