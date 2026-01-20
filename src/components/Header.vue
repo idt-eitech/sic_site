@@ -38,7 +38,29 @@
           </div>
         </div>
       </div>
-      <router-link to="/journals">Journals</router-link>
+      <div
+        class="nav-item journals-item"
+        @mouseenter="openMenu('journals')"
+      >
+        <router-link
+          to="/journals"
+          @focus="openMenu('journals')"
+        >
+          Journals
+        </router-link>
+        <div
+          class="conference-submenu"
+          :class="{ 'is-open': activeTopMenu === 'journals' }"
+          @mouseenter="openMenu('journals')"
+        >
+          <div class="conference-list">
+            <h4>CBM</h4>
+            <router-link to="/journals/cbm">
+              Computational Biomedicine
+            </router-link>
+          </div>
+        </div>
+      </div>
       <router-link to="/executive-board">Board of Executive Committee</router-link>
       <!-- <router-link to="/membership">Membership</router-link> -->
       <router-link to="/contact">Contact</router-link>

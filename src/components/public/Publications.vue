@@ -6,7 +6,7 @@
     </p>
     <ul class="pub-list">
       <li>
-        <a href="http://poster-openaccess.com/" class="pub-link">Papers Collection of ICIC & ICAI 2024</a>
+        <a href="http://poster-openaccess.com/" class="pub-link">Posters Collection of ICIC & ICAI</a>
       </li>
     </ul>
   </section>

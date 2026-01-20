@@ -12,6 +12,7 @@ import Conferences from '../components/public/Conferences.vue'
 import Publications from '../components/public/Publications.vue'
 import Membership from '../components/public/Membership.vue'
 import Journals from '../components/public/Journals.vue'
+import CbmJournal from '../components/public/CbmJournal.vue'
 import UserProfile from '../components/user/UserProfile.vue'
 import Contact from '../components/public/Contact.vue'
 import ExecutiveBoard from '../components/public/ExecutiveBoard.vue'
@@ -52,6 +53,11 @@ const router = createRouter({
       path: '/journals',
       name: 'journals',
       component: Journals
+    },
+    {
+      path: '/journals/cbm',
+      name: 'journals-cbm',
+      component: CbmJournal
     },
     {
       path: '/publications',

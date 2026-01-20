@@ -9,7 +9,7 @@
         <h3>International Conference on Intelligent Computing (ICIC) 2026</h3>
         <p>Date: July 22–26, 2026<br>Location: Toronto, Canada</p>
         <p><strong>Theme:</strong> Advanced Intelligent Computing Methodologies and Applications</p>
-        <p><strong>Proceedings:</strong> Springer-Nature (LNCS/LNAI/LNBI) for accepted Oral papers</p>
+        <p><strong>Proceedings:</strong> Springer-Nature (LNCS/LNAI/LNBI)</p>
         <p><strong>Support:</strong> Natural Science Foundation of China</p>
         <a href="http://www.ic-icc.cn/" class="details-link" target="_blank" rel="noopener">Official Site</a>
       </div>
