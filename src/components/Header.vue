@@ -42,12 +42,13 @@
         class="nav-item journals-item"
         @mouseenter="openMenu('journals')"
       >
-        <router-link
-          to="/journals"
+        <span
+          class="nav-root"
           @focus="openMenu('journals')"
+          tabindex="0"
         >
           Journals
-        </router-link>
+        </span>
         <div
           class="conference-submenu"
           :class="{ 'is-open': activeTopMenu === 'journals' }"
@@ -167,6 +168,11 @@ const handleLogout = async () => {
 }
 .nav-menu a:hover {
   color: #90caf9; /* Lighter blue for hover */
+}
+
+.nav-root {
+  color: #fff;
+  font-weight: 500;
 }
 
 .user-menu {

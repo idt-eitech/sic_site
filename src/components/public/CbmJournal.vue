@@ -99,7 +99,7 @@ import logoImage from '../../assets/journals/cbm_logo.png'
   padding: 2rem;
   font-size: 1.05rem;
   line-height: 1.6;
-  text-align: center;
+  text-align: justify;
 }
 .cbm-card p {
   margin-bottom: 1rem;

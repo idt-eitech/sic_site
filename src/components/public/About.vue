@@ -29,6 +29,7 @@
   box-shadow: 0 2px 8px rgba(26,35,126,0.06);
   padding: 2rem;
   font-size: 1.1rem;
+  text-align: justify;
 }
 </style> 
 
