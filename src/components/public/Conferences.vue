@@ -36,7 +36,7 @@
   margin-bottom: 1rem;
 }
 .desc {
-  text-align: center;
+  text-align: justify;
   margin-bottom: 2rem;
   color: #3949ab;
 }
@@ -54,7 +54,7 @@
   padding: 1.5rem 2rem;
   min-width: 260px;
   max-width: 320px;
-  text-align: left;
+  text-align: justify;
 }
 .conference-card h3 {
   margin-top: 0;
