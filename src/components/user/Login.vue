@@ -1,7 +1,13 @@
 <template>
   <div class="login-container">
     <div class="login-card">
-      <h2>Login</h2>
+      <h2>Request for Preprint ID</h2>
+      <div class="intro-text">
+        <p>
+          We assign DOI (Digital Object Identifier) to preprint papers on behalf of authors, similar to how arXiv assigns arXiv IDs. 
+          To submit your preprint paper and request a DOI, please log in or create an account.
+        </p>
+      </div>
       <form @submit.prevent="handleLogin" class="login-form">
         <div class="form-group">
           <label for="email">Email</label>
@@ -37,7 +43,7 @@
           class="login-button"
         >
           <span v-if="authStore.state.isLoading">Logging in...</span>
-          <span v-else>Login</span>
+          <span v-else>Log In</span>
         </button>
       </form>
       
@@ -93,6 +99,22 @@ h2 {
   text-align: center;
   margin-bottom: 1.5rem;
   color: #333;
+}
+
+.intro-text {
+  background: #e3f2fd;
+  border-left: 4px solid #1a237e;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+
+.intro-text p {
+  margin: 0;
+  color: #1a237e;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  text-align: justify;
 }
 
 .login-form {

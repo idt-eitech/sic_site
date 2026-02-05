@@ -24,7 +24,7 @@ import Footer from './components/Footer.vue'
   flex: 1;
   max-width: 1200px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
   background: #f5f7fa;
 }
 </style>

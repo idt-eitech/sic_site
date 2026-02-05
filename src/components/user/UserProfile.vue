@@ -197,7 +197,7 @@ const loadProfile = async () => {
       throw new Error('You must be logged in to view your profile.');
     }
 
-    const profile = await authService.getProfile(token);
+    const profile = await authService.getCurrentUser(token);
     user.value = profile || {};
 
     if (!user.value.details) {
@@ -245,7 +245,7 @@ const saveProfile = async () => {
       details: { ...editableUser.details }
     };
 
-    const updatedProfile = await authService.updateProfile(token, updateData);
+    const updatedProfile = await authService.updateCurrentUser(token, updateData);
 
     user.value = updatedProfile || {
       ...user.value,

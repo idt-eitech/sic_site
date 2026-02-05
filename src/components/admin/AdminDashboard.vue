@@ -19,28 +19,6 @@
     </div>
 
     <div class="dashboard-content">
-      <div class="welcome-message">
-        <h2>Welcome to Admin Dashboard</h2>
-        <p>Use the navigation menu to access management features:</p>
-        
-        <div class="management-links">
-          <router-link to="/admin/users" class="management-link">
-            <div class="link-icon">👥</div>
-            <div class="link-content">
-              <h3>User Management</h3>
-              <p>Manage user accounts, roles, and permissions</p>
-            </div>
-          </router-link>
-          
-          <router-link to="/admin/papers" class="management-link">
-            <div class="link-icon">📄</div>
-            <div class="link-content">
-              <h3>Paper Management</h3>
-              <p>Review, approve, and manage submitted papers</p>
-            </div>
-          </router-link>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -153,61 +131,6 @@ watch(isAdmin, (isAdmin) => {
 .dashboard-content {
   display: flex;
   justify-content: center;
-}
-
-.welcome-message {
-  max-width: 800px;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.welcome-message h2 {
-  margin-bottom: 10px;
-  color: #2c3e50;
-}
-
-.welcome-message p {
-  margin-bottom: 20px;
-  color: #7f8c8d;
-}
-
-.management-links {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.management-link {
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  border-radius: 8px;
-  background-color: #f8f9fa;
-  text-decoration: none;
-  color: inherit;
-  transition: background-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.management-link:hover {
-  background-color: #e9ecef;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.link-icon {
-  font-size: 2em;
-  margin-right: 15px;
-}
-
-.link-content h3 {
-  margin: 0 0 5px 0;
-  color: #2c3e50;
-}
-
-.link-content p {
-  margin: 0;
-  color: #7f8c8d;
 }
 </style>
 

@@ -67,35 +67,40 @@
       <router-link to="/contact">Contact</router-link>
       
       <!-- Authentication-aware navigation -->
-      <div v-if="authStore.state.isAuthenticated" class="user-menu">
-        <router-link 
-          v-if="authStore.state.user?.role !== 'ADMIN'" 
-          to="/papers" 
-          class="papers-link"
+      <div v-if="authStore.state.isAuthenticated" class="nav-item user-menu-item">
+        <span
+          class="nav-root user-greeting"
+          @focus="openMenu('user')"
+          tabindex="0"
+          @mouseenter="openMenu('user')"
         >
-          My Papers
-        </router-link>
-        <router-link 
-          v-if="authStore.state.user?.role !== 'ADMIN'" 
-          to="/paper-upload" 
-          class="upload-link"
-        >
-          Upload Paper
-        </router-link>
-        <router-link 
-          v-if="authStore.state.user?.role === 'ADMIN'" 
-          to="/admin" 
-          class="admin-link"
-        >
-          Dashboard
-        </router-link>
-        <router-link to="/profile" class="profile-link">Profile</router-link>
-        <span class="user-greeting">Hello, {{ authStore.state.user?.display_name }}</span>
+          Hello, {{ authStore.state.user?.display_name }}
+        </span>
         <button @click="handleLogout" class="logout-btn">Logout</button>
+        <div
+          class="conference-submenu"
+          :class="{ 'is-open': activeTopMenu === 'user' }"
+          @mouseenter="openMenu('user')"
+        >
+          <div v-if="authStore.state.user?.role !== 'ADMIN'" class="conference-list">
+            <h4>Papers</h4>
+            <router-link to="/papers">My Papers</router-link>
+            <router-link to="/paper-upload">Upload Paper</router-link>
+          </div>
+          <div v-if="authStore.state.user?.role === 'ADMIN'" class="conference-list">
+            <h4>Admin</h4>
+            <router-link to="/admin">Dashboard</router-link>
+            <router-link to="/admin/users">User Management</router-link>
+            <router-link to="/admin/papers">Paper Management</router-link>
+          </div>
+          <div class="conference-list">
+            <h4>Account</h4>
+            <router-link to="/profile">Profile</router-link>
+          </div>
+        </div>
       </div>
       <div v-else class="auth-links">
-        <router-link to="/login">Login</router-link>
-        <router-link to="/register">Register</router-link>
+        <router-link to="/login">Request for Preprint ID</router-link>
       </div>
     </nav>
   </header>
@@ -173,12 +178,15 @@ const handleLogout = async () => {
 .nav-root {
   color: #fff;
   font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
-.user-menu {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.nav-root:hover {
+  color: #90caf9;
+}
+
+.user-menu-item {
   margin-left: 1rem;
   padding-left: 1rem;
   border-left: 1px solid rgba(255, 255, 255, 0.3);
@@ -187,72 +195,24 @@ const handleLogout = async () => {
 .user-greeting {
   font-size: 0.9rem;
   color: #e3f2fd;
-}
-
-.papers-link {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-  color: #fff;
-  text-decoration: none;
-}
-
-.papers-link:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-}
-
-.admin-link {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-  color: #fff;
-  text-decoration: none;
-}
-
-.admin-link:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-}
-
-.profile-link {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-  color: #fff;
-  text-decoration: none;
-}
-
-.profile-link:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-}
-
-.upload-link {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-.upload-link:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  cursor: pointer;
 }
 
 .logout-btn {
   background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 0.5rem 1rem;
+  color: #e3f2fd;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 0.25rem 0.75rem;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  margin-left: 0.5rem;
   transition: all 0.2s;
 }
 
 .logout-btn:hover {
   background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.5);
+  border-color: #e3f2fd;
 }
 
 .auth-links {
