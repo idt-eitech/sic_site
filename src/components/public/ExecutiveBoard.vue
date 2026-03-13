@@ -13,14 +13,19 @@
           <div v-else class="avatar-placeholder"></div>
         </div>
         <div class="member-info">
-          <a
-            :href="member.profileUrl"
-            class="member-name-link"
-            target="_blank"
-            rel="noopener"
-          >
-            <p class="member-name">{{ member.name }}</p>
-          </a>
+          <template v-if="member.profileUrl">
+            <a
+              :href="member.profileUrl"
+              class="member-name-link"
+              target="_blank"
+              rel="noopener"
+            >
+              <p class="member-name">Dr./Prof. {{ member.name }}</p>
+            </a>
+          </template>
+          <template v-else>
+            <p class="member-name">Dr./Prof. {{ member.name }}</p>
+          </template>
           <h3>{{ member.role }}</h3>
         </div>
       </div>
@@ -29,17 +34,74 @@
 </template>
 
 <script setup>
-import presidentImage from '../../assets/committee/president.jpg'
+import shaoweiCaiImage from '../../assets/committee/Shaowei Cai.jpg'
+import jairCervantesCanalesImage from '../../assets/committee/Jair Cervantes Canales.png'
+import valeriyaGribovaImage from '../../assets/committee/Valeriya Gribova.png'
+import mMichaelGromihaImage from '../../assets/committee/M. Michael Gromiha.jpg'
+import phalguniGuptaImage from '../../assets/committee/Phalguni Gupta.jpg'
+import laurentHeutteImage from '../../assets/committee/Laurent Heutte.jpg'
+import deShuangHuangImage from '../../assets/committee/De-Shuang Huang.jpg'
+import abirHussainImage from '../../assets/committee/Abir Hussain.png'
+import kangHyunJoImage from '../../assets/committee/Kang-Hyun Jo.jpg'
+import prashanPremaratneImage from '../../assets/committee/Prashan Premaratne.jpg'
+import chunhouZhengImage from '../../assets/committee/Chunhou Zheng.jpg'
 
 const members = [
-  { name: 'De-Shuang Huang', role: 'President', image: presidentImage, profileUrl: 'https://person.eitech.edu.cn/xxkxyjsxb/hds/main.htm' },
-  { name: 'Member Name', role: 'VP of Conferences', profileUrl: 'https://example.com/profile/vp-conferences' },
-  { name: 'Member Name', role: 'VP of Publications', profileUrl: 'https://example.com/profile/vp-publications' },
-  { name: 'Member Name', role: 'VP of Technical Activities', profileUrl: 'https://example.com/profile/vp-technical-activities' },
-  { name: 'Member Name', role: 'VP of Membership', profileUrl: 'https://example.com/profile/vp-membership' },
-  { name: 'Member Name', role: 'VP of Finance', profileUrl: 'https://example.com/profile/vp-finance' },
-  { name: 'Member Name', role: 'VP of Education', profileUrl: 'https://example.com/profile/vp-education' },
-  { name: 'Member Name', role: 'VP of Chapters', profileUrl: 'https://example.com/profile/vp-chapters' }
+  {
+    name: 'Shaowei Cai',
+    role: 'Beijing University of Aeronautics and Astronautics, China',
+    image: shaoweiCaiImage
+  },
+  {
+    name: 'Jair Cervantes Canales',
+    role: 'Autonomous University of Mexico State, Mexico',
+    image: jairCervantesCanalesImage
+  },
+  {
+    name: 'Valeriya Gribova',
+    role: 'Far Eastern Branch of Russian Academy of Sciences, Russia',
+    image: valeriyaGribovaImage
+  },
+  {
+    name: 'M. Michael Gromiha',
+    role: 'Indian Institute of Technology Madras, India',
+    image: mMichaelGromihaImage
+  },
+  {
+    name: 'Phalguni Gupta',
+    role: 'Indian Institute of Technology Kanpur, India',
+    image: phalguniGuptaImage
+  },
+  {
+    name: 'Laurent Heutte',
+    role: 'University of Rouen Normandy, France',
+    image: laurentHeutteImage
+  },
+  {
+    name: 'De-Shuang Huang',
+    role: 'Eastern Institute of Technology, China',
+    image: deShuangHuangImage
+  },
+  {
+    name: 'Abir Hussain',
+    role: 'University of Sharjah, Sharjah, UAE',
+    image: abirHussainImage
+  },
+  {
+    name: 'Kang-Hyun Jo',
+    role: 'University of Ulsan, Korea',
+    image: kangHyunJoImage
+  },
+  {
+    name: 'Prashan Premaratne',
+    role: 'University of Wollongong, Australia',
+    image: prashanPremaratneImage
+  },
+  {
+    name: 'Chunhou Zheng',
+    role: 'Anhui University, China',
+    image: chunhouZhengImage
+  }
 ];
 </script>
 
@@ -101,4 +163,3 @@ const members = [
   font-size: 0.95rem;
 }
 </style>
-
