@@ -35,7 +35,7 @@
 
 <script setup>
 import shaoweiCaiImage from '../../assets/committee/Shaowei Cai.jpg'
-import jairCervantesCanalesImage from '../../assets/committee/Jair Cervantes Canales.png'
+import jairCervantesCanalesImage from '../../assets/committee/Jair Cervantes Canales.jpg'
 import valeriyaGribovaImage from '../../assets/committee/Valeriya Gribova.png'
 import mMichaelGromihaImage from '../../assets/committee/M. Michael Gromiha.jpg'
 import phalguniGuptaImage from '../../assets/committee/Phalguni Gupta.jpg'
@@ -49,7 +49,7 @@ import chunhouZhengImage from '../../assets/committee/Chunhou Zheng.jpg'
 const members = [
   {
     name: 'Shaowei Cai',
-    role: 'Beijing University of Aeronautics and Astronautics, China',
+    role: 'Beihang University, China',
     image: shaoweiCaiImage
   },
   {
