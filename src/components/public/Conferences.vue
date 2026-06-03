@@ -19,7 +19,7 @@
         <p><strong>Theme:</strong> Advanced Applied Intelligence Methodologies and Applications</p>
         <p><strong>Proceedings:</strong> Springer Verlag (LNCS/LNAI/LNBI/CCIS)</p>
         <p><strong>Support:</strong> Natural Science Foundation of China</p>    
-        <a href="http://icai.org.cn/2026/index.php" class="details-link" target="_blank" rel="noopener">Official Site</a>
+        <a href="http://icai.org.cn/" class="details-link" target="_blank" rel="noopener">Official Site</a>
       </div>
     </div>
   </section>

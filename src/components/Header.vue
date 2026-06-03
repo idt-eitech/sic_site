@@ -25,16 +25,24 @@
           @mouseenter="openMenu('conferences')"
         >
           <div class="conference-list">
-            <h4>ICIC</h4>
-            <router-link to="/conferences/icic/editor-committee">
-              ICIC Editor Committee
-            </router-link>
+            <h4>
+              <a
+                class="conference-title-link"
+                href="http://www.ic-icc.cn/"
+                target="_blank"
+                rel="noopener"
+              >ICIC</a>
+            </h4>
           </div>
           <div class="conference-list">
-            <h4>ICAI</h4>
-            <router-link to="/conferences/icai/editor-committee">
-              ICAI Editor Committee
-            </router-link>
+            <h4>
+              <a
+                class="conference-title-link"
+                href="http://icai.org.cn/"
+                target="_blank"
+                rel="noopener"
+              >ICAI</a>
+            </h4>
           </div>
         </div>
       </div>
@@ -252,6 +260,21 @@ const handleLogout = async () => {
   color: #1a237e;
   padding-bottom: 0.25rem;
   border-bottom: 1px solid #e0e0e0;
+}
+.conferences-item .conference-list h4 {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.conference-list h4 .conference-title-link {
+  display: inline;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  margin-top: 0;
+  text-decoration: none;
+}
+.conference-list h4 .conference-title-link:hover {
+  text-decoration: underline;
 }
 .conference-submenu a {
   display: block;
