@@ -1,6 +1,7 @@
 <template>
-  <section id="register" class="register-section">
-    <div class="register-container">
+  <section id="register" class="section section--alt">
+    <div class="container">
+      <div class="register-container card">
       <div class="tabs">
         <div class="tab active">Create new account</div>
         <router-link to="/login" class="tab">Log in</router-link>
@@ -117,10 +118,11 @@
         </div>
 
         <div class="form-actions">
-          <button type="submit" class="submit-btn">Create Account</button>
-          <button type="button" class="cancel-btn" @click="$router.push('/')">Cancel</button>
+          <button type="submit" class="btn btn--primary submit-btn">Create Account</button>
+          <button type="button" class="btn btn--ghost cancel-btn" @click="$router.push('/')">Cancel</button>
         </div>
       </form>
+    </div>
     </div>
   </section>
 </template>
@@ -204,33 +206,27 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
-.register-section {
-  padding: 3rem 2rem;
-  background: #f5f7fa;
-  color: #1a237e;
-}
 .register-container {
   max-width: 700px;
   margin: 0 auto;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(26,35,126,0.06);
-  padding: 2rem 2.5rem;
+  padding: 22px;
 }
 .tabs {
   display: flex;
-  border-bottom: 1px solid #e0e0e0;
-  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
 }
 .tab {
-  padding: 0.75rem 1.5rem;
+  padding: 10px 12px;
   cursor: pointer;
-  font-weight: 500;
-  color: #1a237e;
+  font-weight: 800;
+  color: var(--muted);
   text-decoration: none;
+  border-radius: 12px 12px 0 0;
 }
 .tab.active {
-  border-bottom: 3px solid #1a237e;
+  color: var(--text);
+  border-bottom: 3px solid var(--primary);
 }
 .tab + .tab {
   margin-left: 1rem;
@@ -238,7 +234,7 @@ const handleSubmit = async () => {
 .register-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 12px;
 }
 .form-row {
   display: flex;
@@ -250,69 +246,48 @@ const handleSubmit = async () => {
   flex-direction: column;
 }
 label {
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #1a237e;
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: var(--text);
+  font-size: 0.92rem;
 }
 input {
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 12px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
   font-size: 1rem;
 }
 input:focus {
   outline: none;
-  border-color: #1a73e8;
-  box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.15);
+  border-color: rgba(11, 61, 145, 0.6);
+  box-shadow: 0 0 0 4px rgba(11, 61, 145, 0.12);
 }
 .field-help {
-  margin-top: 0.25rem;
+  margin-top: 6px;
   font-size: 0.85rem;
-  color: #666;
+  color: var(--muted);
+  font-weight: 600;
 }
 .form-actions {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
-  margin-top: 1.5rem;
-}
-.submit-btn {
-  background: #1a237e;
-  color: #fff;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: 600;
-}
-.submit-btn:hover {
-  background: #303f9f;
-}
-.cancel-btn {
-  background: #e0e0e0;
-  color: #333;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.cancel-btn:hover {
-  background: #d5d5d5;
+  margin-top: 16px;
+  flex-wrap: wrap;
 }
 .error-message {
-  padding: 0.75rem 1rem;
-  background: #ffebee;
-  color: #c62828;
-  border-radius: 4px;
-  margin-bottom: 1rem;
+  padding: 10px 12px;
+  background: #fee2e2;
+  color: #7f1d1d;
+  border: 1px solid #fecaca;
+  border-radius: 12px;
 }
 @media (max-width: 600px) {
   .register-container {
-    padding: 1.5rem;
+    padding: 18px;
   }
   .form-row {
     flex-direction: column;
   }
 }
 </style>
-

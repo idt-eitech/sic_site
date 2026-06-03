@@ -16,6 +16,7 @@ import CbmJournal from '../components/public/CbmJournal.vue'
 import UserProfile from '../components/user/UserProfile.vue'
 import Contact from '../components/public/Contact.vue'
 import ExecutiveBoard from '../components/public/ExecutiveBoard.vue'
+import Fellows from '../components/public/Fellows.vue'
 import IcicEditorCommittee from '../components/public/IcicEditorCommittee.vue'
 import IcaiEditorCommittee from '../components/public/IcaiEditorCommittee.vue'
 
@@ -73,6 +74,11 @@ const router = createRouter({
       path: '/executive-board',
       name: 'executive-board',
       component: ExecutiveBoard
+    },
+    {
+      path: '/fellows',
+      name: 'fellows',
+      component: Fellows
     },
     {
       path: '/contact',

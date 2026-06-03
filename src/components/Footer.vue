@@ -1,13 +1,21 @@
 <template>
   <footer class="sic-footer" id="contact">
-    <div class="footer-content">
+    <div class="container footer-content">
       <div class="footer-left">
-        <strong>SIC &mdash; The Society of International Computing</strong><br />
-        Contact: sic_sic_org@163.com
+        <div class="footer-brand">Society of International Computing (SIC)</div>
+        <div class="footer-meta">Contact: sic_sic_org@163.com</div>
       </div>
       <div class="footer-right">
-        沪ICP备2021000765号-5<br/>
-        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011402009930" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/src/assets/备案图标.png" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">沪公网安备31011402021639号</p></a>
+        <div class="footer-meta">沪ICP备2021000765号-5</div>
+        <a
+          class="beian-link"
+          target="_blank"
+          rel="noopener"
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=31011402009930"
+        >
+          <img class="beian-icon" src="/src/assets/备案图标.png" alt="" />
+          <span class="beian-text">沪公网安备31011402021639号</span>
+        </a>
       </div>
     </div>
   </footer>
@@ -15,9 +23,9 @@
 
 <style scoped>
 .sic-footer {
-  background: #1a237e;
-  color: #fff;
-  padding: 1.5rem 2rem 1rem 2rem;
+  background: #0b1f46;
+  color: rgba(255, 255, 255, 0.92);
+  padding: 34px 0;
   margin-top: auto;
 }
 .footer-content {
@@ -25,16 +33,50 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  font-size: 1rem;
+  gap: 16px;
 }
 .footer-left {
-  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 .footer-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   text-align: right;
 }
+
+.footer-brand {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.footer-meta {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.95rem;
+}
+
+.beian-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.beian-link:hover {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.beian-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.beian-text {
+  font-size: 0.95rem;
+}
+
 @media (max-width: 600px) {
   .footer-content {
     flex-direction: column;
@@ -42,6 +84,7 @@
   }
   .footer-right {
     text-align: center;
+    align-items: center;
   }
 }
 </style> 

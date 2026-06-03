@@ -1,74 +1,109 @@
 <template>
-  <section id="conferences" class="conferences-section">
-    <h2>Upcoming Conferences</h2>
-    <p class="desc">
-      SIC organizes two major international meetings each year, bringing together leading minds in computing technology. Below are highlights and official links for each.
-    </p>
-    <div class="conference-list">
-      <div class="conference-card">
-        <h3>International Conference on Intelligent Computing (ICIC) 2026</h3>
-        <p>Date: July 22–26, 2026<br>Location: Toronto, Canada</p>
-        <p><strong>Theme:</strong> Advanced Intelligent Computing Methodologies and Applications</p>
-        <p><strong>Proceedings:</strong> Springer-Nature (LNCS/LNAI/LNBI)</p>
-        <p><strong>Support:</strong> Natural Science Foundation of China</p>
-        <a href="http://www.ic-icc.cn/" class="details-link" target="_blank" rel="noopener">Official Site</a>
-      </div>
-      <div class="conference-card">
-        <h3>International Conference on Applied Intelligence (ICAI) 2026</h3>
-        <p>Date: November 12–15, 2026<br>Location: Ningbo, Zhejiang, China</p>
-        <p><strong>Theme:</strong> Advanced Applied Intelligence Methodologies and Applications</p>
-        <p><strong>Proceedings:</strong> Springer Verlag (LNCS/LNAI/LNBI/CCIS)</p>
-        <p><strong>Support:</strong> Natural Science Foundation of China</p>    
-        <a href="http://icai.org.cn/" class="details-link" target="_blank" rel="noopener">Official Site</a>
+  <section id="conferences" class="section">
+    <div class="container">
+      <h2 class="section-title">Conferences</h2>
+      <p class="section-lead">
+        SIC organizes major international meetings each year, bringing together leading researchers and practitioners in
+        computing and intelligent systems.
+      </p>
+
+      <div class="conference-grid">
+        <article class="conference-card card">
+          <div class="conference-top">
+            <h3 class="conference-title">International Conference on Intelligent Computing (ICIC) 2026</h3>
+            <div class="conference-meta">July 22–26, 2026 · Toronto, Canada</div>
+          </div>
+          <div class="conference-body">
+            <div class="conference-row"><span class="label">Theme</span><span>Advanced Intelligent Computing Methodologies and Applications</span></div>
+            <div class="conference-row"><span class="label">Proceedings</span><span>Springer-Nature (LNCS/LNAI/LNBI)</span></div>
+            <div class="conference-row"><span class="label">Support</span><span>Natural Science Foundation of China</span></div>
+          </div>
+          <div class="conference-actions">
+            <a class="btn btn--primary" href="http://www.ic-icc.cn/" target="_blank" rel="noopener">Official Site</a>
+          </div>
+        </article>
+
+        <article class="conference-card card">
+          <div class="conference-top">
+            <h3 class="conference-title">International Conference on Applied Intelligence (ICAI) 2026</h3>
+            <div class="conference-meta">November 12–15, 2026 · Ningbo, Zhejiang, China</div>
+          </div>
+          <div class="conference-body">
+            <div class="conference-row"><span class="label">Theme</span><span>Advanced Applied Intelligence Methodologies and Applications</span></div>
+            <div class="conference-row"><span class="label">Proceedings</span><span>Springer Verlag (LNCS/LNAI/LNBI/CCIS)</span></div>
+            <div class="conference-row"><span class="label">Support</span><span>Natural Science Foundation of China</span></div>
+          </div>
+          <div class="conference-actions">
+            <a class="btn btn--primary" href="http://icai.org.cn/" target="_blank" rel="noopener">Official Site</a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-.conferences-section {
-  padding: 3rem 2rem;
-  background: #f5f7fa;
-  color: #1a237e;
+.conference-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
-.conferences-section h2 {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-.desc {
-  text-align: justify;
-  margin-bottom: 2rem;
-  color: #3949ab;
-}
-.conference-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-}
+
 .conference-card {
-  background: #fff;
-  border: 1px solid #e3e8f5;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(26,35,126,0.06);
-  padding: 1.5rem 2rem;
-  min-width: 260px;
-  max-width: 320px;
-  text-align: justify;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
 }
-.conference-card h3 {
-  margin-top: 0;
-  color: #1a237e;
+
+.conference-top {
+  margin-bottom: 12px;
 }
-.details-link {
-  display: inline-block;
-  margin-top: 1rem;
-  color: #1a237e;
-  font-weight: 500;
-  text-decoration: underline;
-  transition: color 0.2s;
+
+.conference-title {
+  margin: 0 0 6px 0;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
 }
-.details-link:hover {
-  color: #1976d2;
+
+.conference-meta {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.conference-body {
+  display: grid;
+  gap: 10px;
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.conference-row {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 10px;
+  color: var(--text);
+}
+
+.label {
+  color: var(--muted);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.conference-actions {
+  margin-top: 18px;
+}
+
+@media (max-width: 860px) {
+  .conference-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .conference-row {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

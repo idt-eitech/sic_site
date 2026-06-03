@@ -1,53 +1,54 @@
 <template>
-  <section id="publications" class="publications-section">
-    <h2>Publications</h2>
-    <p class="desc">
-      Explore the latest research, conference proceedings, and technical papers published by SIC members and conference participants.
-    </p>
-    <ul class="pub-list">
-      <li>
-        <a href="http://poster-openaccess.com/" class="pub-link">Posters Collection of ICIC & ICAI</a>
-      </li>
-    </ul>
+  <section id="publications" class="section section--alt">
+    <div class="container">
+      <h2 class="section-title">Publications</h2>
+      <p class="section-lead">
+        Explore research outputs, conference proceedings, and technical papers published by SIC members and conference
+        participants.
+      </p>
+
+      <div class="pub-grid">
+        <a class="pub-card card" href="http://poster-openaccess.com/" target="_blank" rel="noopener">
+          <div class="pub-title">Posters Collection of ICIC & ICAI</div>
+          <div class="pub-meta">Open access · Proceedings and posters</div>
+        </a>
+      </div>
+    </div>
   </section>
 </template>
 
 <style scoped>
-.publications-section {
-  padding: 3rem 2rem;
-  background: #f5f7fa;
-  color: #1a237e;
+.pub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
-.publications-section h2 {
-  text-align: center;
-  margin-bottom: 1rem;
+
+.pub-card {
+  padding: 18px 18px;
+  border-left: 6px solid var(--primary);
+  transition: transform 160ms ease, border-color 160ms ease;
 }
-.desc {
-  text-align: center;
-  margin-bottom: 2rem;
-  color: #3949ab;
+
+.pub-card:hover {
+  transform: translateY(-2px);
 }
-.pub-list {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 0;
-  list-style: none;
+
+.pub-title {
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
 }
-.pub-link {
-  display: block;
-  background: #fff;
-  border-left: 6px solid #1a237e;
-  border-radius: 6px;
-  margin-bottom: 1.2rem;
-  padding: 1rem 1.5rem;
-  color: #1a237e;
-  font-weight: 500;
-  text-decoration: none;
-  transition: background 0.2s, color 0.2s;
+
+.pub-meta {
+  color: var(--muted);
+  font-weight: 600;
 }
-.pub-link:hover {
-  background: #e3e8f5;
-  color: #1976d2;
+
+@media (max-width: 860px) {
+  .pub-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style> 
-

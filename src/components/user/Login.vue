@@ -1,58 +1,56 @@
 <template>
-  <div class="login-container">
-    <div class="login-card">
-      <h2>Request for Preprint ID</h2>
-      <div class="intro-text">
-        <p>
-          We assign DOI (Digital Object Identifier) to preprint papers on behalf of authors, similar to how arXiv assigns arXiv IDs. 
-          To submit your preprint paper and request a DOI, please log in or create an account.
+  <section class="section section--alt">
+    <div class="container auth-shell">
+      <div class="login-card card">
+        <h2 class="title">Request for Preprint ID</h2>
+        <div class="intro-text">
+          <p>
+            We assign DOI (Digital Object Identifier) to preprint papers on behalf of authors, similar to how arXiv
+            assigns arXiv IDs. To submit your preprint paper and request a DOI, please log in or create an account.
+          </p>
+        </div>
+        <form @submit.prevent="handleLogin" class="login-form">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              v-model="credentials.email"
+              type="email"
+              required
+              placeholder="Enter your email"
+              :disabled="authStore.state.isLoading"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              v-model="credentials.password"
+              type="password"
+              required
+              placeholder="Enter your password"
+              :disabled="authStore.state.isLoading"
+            />
+          </div>
+
+          <div v-if="authStore.state.error" class="error-message">
+            {{ authStore.state.error }}
+          </div>
+
+          <button type="submit" :disabled="authStore.state.isLoading" class="btn btn--primary login-button">
+            <span v-if="authStore.state.isLoading">Logging in...</span>
+            <span v-else>Log In</span>
+          </button>
+        </form>
+
+        <p class="register-link">
+          Don't have an account?
+          <router-link to="/register">Register here</router-link>
         </p>
       </div>
-      <form @submit.prevent="handleLogin" class="login-form">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            id="email"
-            v-model="credentials.email"
-            type="email"
-            required
-            placeholder="Enter your email"
-            :disabled="authStore.state.isLoading"
-          />
-        </div>
-        
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            id="password"
-            v-model="credentials.password"
-            type="password"
-            required
-            placeholder="Enter your password"
-            :disabled="authStore.state.isLoading"
-          />
-        </div>
-        
-        <div v-if="authStore.state.error" class="error-message">
-          {{ authStore.state.error }}
-        </div>
-        
-        <button
-          type="submit"
-          :disabled="authStore.state.isLoading"
-          class="login-button"
-        >
-          <span v-if="authStore.state.isLoading">Logging in...</span>
-          <span v-else>Log In</span>
-        </button>
-      </form>
-      
-      <p class="register-link">
-        Don't have an account? 
-        <router-link to="/register">Register here</router-link>
-      </p>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>
@@ -78,49 +76,43 @@ const handleLogin = async () => {
 </script>
 
 <style scoped>
-.login-container {
+.auth-shell {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 60vh;
-  padding: 2rem;
 }
 
 .login-card {
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 22px;
   width: 100%;
-  max-width: 400px;
+  max-width: 440px;
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #333;
+.title {
+  margin: 0 0 14px 0;
+  text-align: left;
+  letter-spacing: -0.02em;
 }
 
 .intro-text {
-  background: #e3f2fd;
-  border-left: 4px solid #1a237e;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  border-radius: 4px;
+  background: rgba(11, 61, 145, 0.06);
+  border: 1px solid rgba(11, 61, 145, 0.14);
+  padding: 12px 12px;
+  margin-bottom: 16px;
+  border-radius: 12px;
 }
 
 .intro-text p {
   margin: 0;
-  color: #1a237e;
+  color: var(--muted);
   line-height: 1.6;
   font-size: 0.95rem;
-  text-align: justify;
+  text-align: left;
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 12px;
 }
 
 .form-group {
@@ -129,72 +121,52 @@ h2 {
 }
 
 label {
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-  color: #555;
+  margin-bottom: 8px;
+  font-weight: 700;
+  color: var(--text);
+  font-size: 0.92rem;
 }
 
 input {
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 12px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
   font-size: 1rem;
 }
 
 input:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  border-color: rgba(11, 61, 145, 0.6);
+  box-shadow: 0 0 0 4px rgba(11, 61, 145, 0.12);
 }
 
 input:disabled {
-  background-color: #f5f5f5;
+  background-color: rgba(15, 23, 42, 0.03);
   cursor: not-allowed;
 }
 
 .error-message {
-  color: #dc3545;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  padding: 0.75rem;
-  border-radius: 4px;
+  color: #7f1d1d;
+  background-color: #fee2e2;
+  border: 1px solid #fecaca;
+  padding: 10px 12px;
+  border-radius: 12px;
   font-size: 0.9rem;
 }
 
 .login-button {
-  background-color: #007bff;
-  color: white;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.login-button:hover:not(:disabled) {
-  background-color: #0056b3;
-}
-
-.login-button:disabled {
-  background-color: #6c757d;
-  cursor: not-allowed;
+  width: 100%;
+  justify-content: center;
 }
 
 .register-link {
-  text-align: center;
-  margin-top: 1.5rem;
-  color: #666;
+  text-align: left;
+  margin: 14px 0 0 0;
+  color: var(--muted);
+  font-weight: 600;
 }
 
 .register-link a {
-  color: #007bff;
-  text-decoration: none;
-}
-
-.register-link a:hover {
-  text-decoration: underline;
+  font-weight: 800;
 }
 </style>
-

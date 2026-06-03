@@ -4,9 +4,9 @@ import Footer from './components/Footer.vue'
 </script>
 
 <template>
-  <div id="app">
+  <div class="app-shell">
     <Header />
-    <main class="app-content">
+    <main class="app-main">
       <router-view></router-view>
     </main>
     <Footer />
@@ -14,17 +14,14 @@ import Footer from './components/Footer.vue'
 </template>
 
 <style scoped>
-#app {
+.app-shell {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: var(--sic-bg, #fff);
+  background: var(--page-bg);
 }
-.app-content {
+.app-main {
   flex: 1;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0;
-  background: #f5f7fa;
+  background: var(--page-bg);
 }
 </style>
