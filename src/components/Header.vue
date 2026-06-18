@@ -70,6 +70,11 @@
           </div>
         </div>
       </div>
+      <a
+        href="http://poster-openaccess.com/"
+        target="_blank"
+        rel="noopener"
+      >Open Access</a>
       <router-link to="/executive-board">Board of Executive Committee</router-link>
       <!-- <router-link to="/membership">Membership</router-link> -->
       <router-link to="/contact">Contact</router-link>
