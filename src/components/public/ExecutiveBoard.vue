@@ -1,5 +1,38 @@
 <template>
   <section class="exec-board-section">
+    <h2>President</h2>
+    <div class="members-grid members-grid--president">
+      <div class="member-card" v-for="member in president" :key="member.role">
+        <div class="avatar-wrapper">
+          <img
+            v-if="member.image"
+            :src="member.image"
+            :alt="member.role"
+            class="avatar-image"
+          />
+          <div v-else class="avatar-placeholder"></div>
+        </div>
+        <div class="member-info">
+          <template v-if="member.profileUrl">
+            <a
+              :href="member.profileUrl"
+              class="member-name-link"
+              target="_blank"
+              rel="noopener"
+            >
+              <p class="member-name">Dr./Prof. {{ member.name }}</p>
+            </a>
+          </template>
+          <template v-else>
+            <p class="member-name">Dr./Prof. {{ member.name }}</p>
+          </template>
+          <h3>{{ member.role }}</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="exec-board-section">
     <h2>Board of Executive Committee</h2>
     <div class="members-grid">
       <div class="member-card" v-for="member in members" :key="member.role">
@@ -45,6 +78,14 @@ import abirHussainImage from '../../assets/committee/Abir Hussain.png'
 import kangHyunJoImage from '../../assets/committee/Kang-Hyun Jo.jpg'
 import prashanPremaratneImage from '../../assets/committee/Prashan Premaratne.jpg'
 import chunhouZhengImage from '../../assets/committee/Chunhou Zheng.jpg'
+
+const president = [
+  {
+    name: 'De-Shuang Huang',
+    role: 'Eastern Institute of Technology, China',
+    image: deShuangHuangImage
+  }
+]
 
 const members = [
   {
@@ -102,7 +143,7 @@ const members = [
     role: 'Anhui University, China',
     image: chunhouZhengImage
   }
-];
+]
 </script>
 
 <style scoped>
@@ -120,6 +161,14 @@ const members = [
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1.5rem;
+}
+.members-grid--president {
+  display: flex;
+  justify-content: center;
+}
+.members-grid--president .member-card {
+  width: 220px;
+  max-width: 100%;
 }
 .member-card {
   background: #fff;
